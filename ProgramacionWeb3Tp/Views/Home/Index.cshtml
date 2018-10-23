@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Pedido de Empanadas!";
+}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Realizá tu Pedido</h1>
+        <p>¿Que gusto estabas buscando?¿Querés tu Pedido rápido y a calentito?</p>
+        <p>Ahora lo vas a poder conseguir <br />rápido y sencillo, gracias a Pedimpanadas :)</p>
+        <p>
+            @Html.ActionLink("¡Registrarme!", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-primary btn-md" })
+            @Html.ActionLink("Iniciar sesión", "login", "Home", new { area = "" }, new { @class = "btn btn-info btn-md" })
+        </p>
+    </div>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>En todo momento</h2>
+            <p>Desde la web o desde tu celular, tu información siempre disponible para que accedas cuando quieras</p>
+            <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+        </div>
+        <div class="col-md-4">
+            <h2>Rápido y fácil</h2>
+            <p>Sistema fácil de utilizar y simple, para realizar tu Pedido cuando y como quieras</p>
+            <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+        </div>
+        <div class="col-md-4">
+            <h2>Todos los sabores que a vos más te gustan</h2>
+            <p>Jamon y Queso, Humita, Pollo, Carne? Acá lo podés pedir</p>
+            <!--<p><a class="btn btn-default" href="#" role="button">View details »</a></p>-->
+        </div>
+    </div>
+</div>
