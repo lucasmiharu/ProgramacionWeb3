@@ -1,0 +1,51 @@
+﻿@model Pedido_Empanadas.Models.Usuario
+@{
+/**/
+
+// ViewBag.Title = "Login"; }
+/*@if (ViewBag.Error != null)
+{//si existe un error de logueo
+    <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-danger text-center">
+            <h5>@ViewBag.Error</h5>
+        </div>
+    </div>
+}
+else if (Session["Action"] != null)
+{//si se intenta ingresar a una pagina de administracion sin loguearse
+    <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-danger text-center">
+            <h5>Necesita estar logueado para ingresar a esta pagina</h5>
+        </div>
+    </div>
+}*/
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel-body panel panel-info">
+        <div class="form-group panel-primary">
+            <div class="text-center panel-heading">
+                <h5>Ingresar Credenciales</h5>
+            </div>
+        </div>
+
+
+        @using (Html.BeginForm("VerificarUsuario", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {//formulario de login
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="form-control">
+                    @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email" })
+                </div>
+                @Html.ValidationMessage("Email")
+            </div>
+            <div class="form-group">
+                <div class="form-control">
+                    @Html.PasswordFor(model => model.Password, new { @placeholder = "Password" })
+                </div>
+                @Html.ValidationMessage("Password")
+            </div>
+
+            <button type="submit" class="btn btn-info">Login</button><br /><br />
+        }
+    </div>
+</div>
+}
