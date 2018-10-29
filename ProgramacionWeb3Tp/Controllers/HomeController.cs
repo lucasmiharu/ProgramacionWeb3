@@ -14,7 +14,11 @@ namespace Pedido_Empanadas.Controllers
         }
 
         //Pantalla Login
-        public ActionResult login()
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult Registracion()
         {
             return View();
         }
