@@ -22,7 +22,37 @@ namespace Pedido_Empanadas.Controllers
         //Pantalla Login
         public ActionResult Login()
         {
-            return View();
+            Usuario usr = new Usuario();
+            return View(usr);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]  
+        public ActionResult Loguear(Usuario usr)
+        {
+            Usuario usrLogueado;
+
+            
+                usrLogueado =_usuarioServicio.LoguearUsuario(usr);
+
+                if (usrLogueado == null)
+                {
+                    ViewBag.Mensaje = _usuarioServicio.mostrarMensajeDeError();
+                    return View("Login",usr);
+                }
+                else
+                {
+                //agregar redirect to action a HomeUsuario
+                    ViewBag.Mensaje = "Usuario logueado:" + usrLogueado.Email;
+                ClsSesion.SetUsuarioLogueado(usrLogueado);
+
+                //Para testear la clase session 
+                //ClsSesion.GetUsuarioLogueado();
+                //ClsSesion.EliminarSesion();
+
+                return View("Login", usr);
+                }                                                   
+
         }
 
         [HttpGet]

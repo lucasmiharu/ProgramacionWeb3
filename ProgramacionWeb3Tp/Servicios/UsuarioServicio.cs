@@ -37,6 +37,10 @@ namespace ProgramacionWeb3Tp.Servicios
 
             usuarioOK = condb.Usuario.Where(u => u.Email == usuario.Email
                                                && u.Password == usuario.Password).SingleOrDefault();
+            if (usuarioOK == null)
+            {
+                codigoErrorRegistro = 0;
+            }
 
             return usuarioOK;
         }

@@ -160,6 +160,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClsSesion.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
     <Compile Include="Models\EstadoPedido.cs">
       <DependentUpon>Pedido.tt</DependentUpon>
