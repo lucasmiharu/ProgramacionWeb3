@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="C_TPModelStoreContainer" CdmEntityContainer="Pedidos">
+    <EntitySetMapping Name="EstadoPedido">
+      <EntityTypeMapping TypeName="C_TPModel.EstadoPedido">
+        <MappingFragment StoreEntitySet="EstadoPedido">
+          <ScalarProperty Name="IdEstadoPedido" ColumnName="IdEstadoPedido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GustoEmpanada">
+      <EntityTypeMapping TypeName="C_TPModel.GustoEmpanada">
+        <MappingFragment StoreEntitySet="GustoEmpanada">
+          <ScalarProperty Name="IdGustoEmpanada" ColumnName="IdGustoEmpanada" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvitacionPedido">
+      <EntityTypeMapping TypeName="C_TPModel.InvitacionPedido">
+        <MappingFragment StoreEntitySet="InvitacionPedido">
+          <ScalarProperty Name="IdInvitacionPedido" ColumnName="IdInvitacionPedido" />
+          <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Completado" ColumnName="Completado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvitacionPedidoGustoEmpanadaUsuario">
+      <EntityTypeMapping TypeName="C_TPModel.InvitacionPedidoGustoEmpanadaUsuario">
+        <MappingFragment StoreEntitySet="InvitacionPedidoGustoEmpanadaUsuario">
+          <ScalarProperty Name="IdInvitacionPedidoGustoEmpanadaUsuario" ColumnName="IdInvitacionPedidoGustoEmpanadaUsuario" />
+          <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+          <ScalarProperty Name="IdGustoEmpanada" ColumnName="IdGustoEmpanada" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pedido">
+      <EntityTypeMapping TypeName="C_TPModel.Pedido">
+        <MappingFragment StoreEntitySet="Pedido">
+          <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+          <ScalarProperty Name="IdUsuarioResponsable" ColumnName="IdUsuarioResponsable" />
+          <ScalarProperty Name="NombreNegocio" ColumnName="NombreNegocio" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdEstadoPedido" ColumnName="IdEstadoPedido" />
+          <ScalarProperty Name="PrecioUnidad" ColumnName="PrecioUnidad" />
+          <ScalarProperty Name="PrecioDocena" ColumnName="PrecioDocena" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="C_TPModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GustoEmpanadaDisponiblePedido" TypeName="C_TPModel.GustoEmpanadaDisponiblePedido" StoreEntitySet="GustoEmpanadaDisponiblePedido">
+      <EndProperty Name="GustoEmpanada">
+        <ScalarProperty Name="IdGustoEmpanada" ColumnName="IdGustoEmpanada" />
+      </EndProperty>
+      <EndProperty Name="Pedido">
+        <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

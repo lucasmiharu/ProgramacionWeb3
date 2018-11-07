@@ -198,3 +198,7 @@ C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\obj\Debug\Programaci
 C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\obj\Debug\ProgramacionWeb3Tp.csproj.CopyComplete
 C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\obj\Debug\ProgramacionWeb3Tp.dll
 C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\obj\Debug\ProgramacionWeb3Tp.pdb
+C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\bin\EntityFramework.dll
+C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\bin\EntityFramework.SqlServer.dll
+C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\bin\EntityFramework.xml
+C:\Users\User\Desktop\ProgramacionWeb3Tp\ProgramacionWeb3Tp\bin\EntityFramework.SqlServer.xml

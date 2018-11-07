@@ -1,51 +1,56 @@
-﻿@model Pedido_Empanadas.Models.Usuario
-@{
-/**/
+﻿@model ProgramacionWeb3Tp.Models.Usuario
 
-// ViewBag.Title = "Login"; }
-/*@if (ViewBag.Error != null)
-{//si existe un error de logueo
-    <div class="col-md-6 col-md-offset-3">
-        <div class="alert alert-danger text-center">
-            <h5>@ViewBag.Error</h5>
-        </div>
-    </div>
-}
-else if (Session["Action"] != null)
-{//si se intenta ingresar a una pagina de administracion sin loguearse
-    <div class="col-md-6 col-md-offset-3">
-        <div class="alert alert-danger text-center">
-            <h5>Necesita estar logueado para ingresar a esta pagina</h5>
-        </div>
-    </div>
-}*/
-<div class="col-md-6 col-md-offset-3">
-    <div class="panel-body panel panel-info">
-        <div class="form-group panel-primary">
-            <div class="text-center panel-heading">
-                <h5>Ingresar Credenciales</h5>
-            </div>
-        </div>
+<div class="container" align="center">
+    <div id="login" align="center">
+        <h3 class="text-center text-white pt-5">Para continuar, es necesario iniciar sesión</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-12">
+                    <div id="login-box" class="col-md-12">
+
+                        <form id="login-form" class="form" action="Loguear" method="post">
+                            @Html.AntiForgeryToken()
+                            <h3 class="text-center text-info">Iniciar sesión</h3>
+                            <div class="form-group">
+
+                              
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "text-info" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email", autocomplete = "off" } })
+                                   
+                                </div>
 
 
-        @using (Html.BeginForm("VerificarUsuario", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {//formulario de login
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                <div class="form-control">
-                    @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "text-info" })
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", autocomplete = "off" } })
+                                  
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="remember-me" class="text-info"><span>Recordar usuario</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="Ingresar">
+                                </div>
+                                <br />
+                                <br />
+                                <div id="register-link" class="text-center">
+                                    @Html.ActionLink("¡Registrarme!", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-primary btn-md" })
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                            {//si existe un error de registro
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="alert alert-danger text-center">
+                                        <h5>@ViewBag.Mensaje</h5>
+                                    </div>
+                                </div>
+                            }
+                        </form>
+                    </div>
                 </div>
-                @Html.ValidationMessage("Email")
             </div>
-            <div class="form-group">
-                <div class="form-control">
-                    @Html.PasswordFor(model => model.Password, new { @placeholder = "Password" })
-                </div>
-                @Html.ValidationMessage("Password")
-            </div>
-
-            <button type="submit" class="btn btn-info">Login</button><br /><br />
-        }
+        </div>
     </div>
 </div>
-}
