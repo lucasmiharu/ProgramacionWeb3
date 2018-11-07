@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web;
-using System.Web.Security;
-using System.Web.WebPages;
-
-using System.Web.UI.WebControls;
-using System.Configuration;
 
 
-using System.Runtime.Remoting.Contexts;
-using System.Web.Mvc;
-using System.Net;
-using System.Text;
 
 namespace ProgramacionWeb3Tp.Models
 {

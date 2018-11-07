@@ -18,15 +18,7 @@ namespace ProgramacionWeb3Tp.Models
             this.Email = usuario.Email;
             this.Password = usuario.Password;           
         }
-
-       
-        //Constructor que uso para mandar los datos del registro al repository
-        public Usuario(string nombre, string apellido, string email, string password)
-        {
-            this.Email = email;
-            this.Password = password;
-        }
-
+                      
               
     }
 }
