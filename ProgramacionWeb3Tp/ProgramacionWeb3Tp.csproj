@@ -161,6 +161,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClsSesion.cs" />
+    <Compile Include="Models\Entities\Usuario.cs" />
     <Compile Include="Models\EstadoPedido.cs">
       <DependentUpon>Pedido.tt</DependentUpon>
     </Compile>
@@ -173,6 +175,7 @@
     <Compile Include="Models\InvitacionPedidoGustoEmpanadaUsuario.cs">
       <DependentUpon>Pedido.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\UsuarioMetadata.cs" />
     <Compile Include="Models\Pedido.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -186,15 +189,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pedido.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pedido1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Pedido.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>Pedido.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\UsuarioServicio.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -264,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Autenticacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
