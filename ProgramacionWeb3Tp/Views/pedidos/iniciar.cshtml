@@ -1,7 +1,90 @@
-﻿
+@model ProgramacionWeb3Tp.Models.Pedido
+@model ProgramacionWeb3Tp.Models.Pedido
+
 @{
-    ViewBag.Title = "iniciar";
+    ViewBag.Title = "Pedido de Empanadas!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>iniciar</h2>
+@using (Html.BeginForm("RegistrarPedido", "Pedidos", "Post"))
+{
+    @Html.AntiForgeryToken()
+    <div class="container" align="center">
+        <div id="login" align="center">
+            <h3 class="text-center text-white pt-5">Elegir gustos</h3>
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-12">
+                        <div id="login-box" class="col-md-12">
 
+
+                            <div class="form">
+                                <h3 class="text-center text-info">Registración</h3>
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IdUsuarioResponsable, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.IdUsuarioResponsable, new { htmlAttributes = new { @class = "form-control", placeholder = "Usuario", autocomplete = "off", value = "1" } })
+                                        @Html.ValidationMessageFor(model => model.IdUsuarioResponsable, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IdEstadoPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.IdEstadoPedido, new { htmlAttributes = new { @class = "form-control", placeholder = "EstadoPedido", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "EstadoPedido", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "EstadoPedido", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FechaCreacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.FechaCreacion, new { htmlAttributes = new { @class = "form-control", placeholder = "EstadoPedido", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <input type="submit" name="submit" class="btn btn-info" value="Iniciar pedido">
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

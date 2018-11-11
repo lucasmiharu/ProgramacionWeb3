@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pedidos de empanadas</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <div class="class=" d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Pedidos de empanadas", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hace tu pedido!</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                @Html.ActionLink("Pedido desde Cero", "Index", "Home", new { area = "" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Copiar Pedido", "Index", "Home", new { area = "" }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                        <li>@Html.ActionLink("Lista de pedidos", "ListaPedidos", "Pedido")</li>
+                        <li>@Html.ActionLink("Elegir Gustos", "ElegirGustos", "Pedido")</li>
+                        <li>@Html.ActionLink("Salir", "Salir", "Home")</li>
+
+                    </ul>
+
+                   
+                    
+
+                   
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()     
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
