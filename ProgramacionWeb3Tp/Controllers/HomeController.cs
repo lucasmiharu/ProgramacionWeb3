@@ -12,6 +12,8 @@ namespace Pedido_Empanadas.Controllers
    
     public class HomeController : Controller
     {
+
+        
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
         public ActionResult Index()
@@ -86,6 +88,17 @@ namespace Pedido_Empanadas.Controllers
             return View("Registracion");
         }
 
+        [HttpGet]
+        public ActionResult Salir()
+        {
+
+          if ( ClsSesion.VerificarLogueo(ClsSesion.GetUsuarioLogueado()))
+            {
+                ClsSesion.EliminarSesion();
+            }
+
+            return RedirectToAction("Index");
+        }
 
     }
 
