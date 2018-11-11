@@ -1,7 +1,108 @@
-﻿
-@{
-    ViewBag.Title = "iniciar";
+﻿@{
+    ViewBag.Title = "Pedido de Empanadas!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>iniciar</h2>
 
+<div class="container">
+    <div class="page-header">
+        <h1>Pedido nuevo <small>Primero elegi los gustos y las cantidades que desees.</small></h1>
+    </div>
+    <div class="col-lg-12">
+        Estado de tu pedido
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                <span class="sr-only">45% Complete</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <h3>Seleccion de empanadas</h3>
+            <h5>Elegi todas las que necesites</h5>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>
+                            Gusto 1
+                            <br />
+                            $25
+                        </p>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-info" id="gusto" data-price="1">Agregar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>
+                            Gusto 2
+                            <br />
+                            $25
+                        </p>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-info" data-price="25.99">Agregar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>
+                            Gusto 3
+                            <br />
+                            $25
+                        </p>
+                        <div class="pull-right">
+                            <a href="#0" class="btn btn-info" data-price="25.99">Agregar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>
+                            Gusto 4
+                            <br />
+                            $25
+                        </p>
+                        <div class="pull-right">
+                            <a href="#0" class="btn btn-info" data-price="25.99">Agregar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--Carrito de compras-->
+    <div class="cd-cart-container empty">
+        <a href="#0" class="cd-cart-trigger">
+            Carrito de empanadas
+            <ul class="count">
+                <li>0</li>
+                <li>0</li>
+            </ul>
+        </a>
+        <div class="cd-cart">
+            <div class="wrapper">
+                <header>
+                    <h2> Carrito de empanadas</h2>
+                    <span class="undo">Item removed. <a href="#0">Undo</a></span>
+                </header>
+                <div class="body">
+                    <ul>
+                        <!--Productos que se van cargando-->
+                    </ul>
+                </div>
+                <footer>
+                    <a href="#0" class="checkout btn">Confirmar pedido - $<span>0</span></a>
+                </footer>
+            </div>
+        </div> <!-- .cd-cart -->
+    </div> <!-- cd-cart-container -->
+</div>
