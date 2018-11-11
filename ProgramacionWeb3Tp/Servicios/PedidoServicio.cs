@@ -77,5 +77,19 @@ namespace ProgramacionWeb3Tp.Servicios
                 ctx.SaveChanges();
             }
         }
+        
+       private Pedidos condb = new Pedidos();
+
+        public void SavePedido(Pedido pedido)
+        {
+            Pedido pedidoNuevo = null;
+            
+            pedidoNuevo = new Pedido(pedido);
+
+            condb.Pedido.Add(pedido);
+            condb.SaveChanges();
+
+                   
+        }
     }
 }
