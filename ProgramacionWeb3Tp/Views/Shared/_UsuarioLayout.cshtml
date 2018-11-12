@@ -4,10 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Pedidos de empanadas</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -26,23 +27,28 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Productos", "Productos", "Home")</li>
+                        <li>@Html.ActionLink("Quienes somos", "Nosotros", "Home")</li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hace tu pedido!</a>
+                            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hace tu pedido!  <span class="caret"></span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                @Html.ActionLink("Pedido desde Cero", "Index", "Home", new { area = "" }, new { @class = "dropdown-item" })
-                                @Html.ActionLink("Copiar Pedido", "Index", "Home", new { area = "" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Pedido desde Cero", "Iniciar", "Pedidos", new { area = "" }, new { @class = "btn btn-success btn-block" })
+                                @Html.ActionLink("Copiar Pedido", "Index", "Home", new { area = "" }, new { @class = "btn btn-info btn-block" })
                             </div>
                         </li>
-                        <li>@Html.ActionLink("Lista de pedidos", "ListaPedidos", "Pedido")</li>
-                        <li>@Html.ActionLink("Elegir Gustos", "ElegirGustos", "Pedido")</li>
-                        <li>@Html.ActionLink("Salir", "Salir", "Home")</li>
+                        <li>@Html.ActionLink("Mis pedidos", "ListaPedidos", "Pedido")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
+                        <li><div class="btn btn-info navbar-btn"><span class="glyphicon glyphicon-user"></span>&nbsp;@Session["Usuario"]</div></li>
+                        <li>@Html.ActionLink("Salir", "Salir", "Home")</li>
                     </ul>
 
-                   
-                    
 
-                   
+
+
 
                 </div>
 
@@ -53,10 +59,10 @@
     </div>
 
     <div class="container body-content">
-        @RenderBody()     
+        @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p align="center">&copy; @DateTime.Now.Year - @ViewBag.Title</p>
         </footer>
     </div>
 

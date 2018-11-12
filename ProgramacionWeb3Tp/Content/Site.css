@@ -2,7 +2,25 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+img {
+    width: 100%
+}
+.btn-slider{
+    margin-top:250px;
+    margin-left:850px;
+    position:fixed;
+}
 
+.titulo-slider {
+    margin-top: 50px;
+    position: fixed;
+    margin-left: 35px;
+    color: white;
+    font-weight: bold;
+}
+.carousel-images {
+    height: 350px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

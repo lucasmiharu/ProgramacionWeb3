@@ -21,6 +21,16 @@ namespace Pedido_Empanadas.Controllers
             return View();
         }
 
+        public ActionResult Productos()
+        {
+            return View();
+        }
+
+        public ActionResult Nosotros()
+        {
+            return View();
+        }
+
         //Pantalla Login
         public ActionResult Login()
         {
@@ -46,6 +56,9 @@ namespace Pedido_Empanadas.Controllers
                 {
                 //agregar redirect to action a HomeUsuario
                     ViewBag.Mensaje = "Usuario logueado:" + usrLogueado.Email;
+                    ViewBag.Usuario = usrLogueado.Email;
+                    TempData["usuario"] = usrLogueado.Email;
+                    Session["usuario"] = usrLogueado.Email;
                 ClsSesion.SetUsuarioLogueado(usrLogueado);
 
                 //Para testear la clase session 

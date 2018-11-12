@@ -10,7 +10,7 @@ namespace ProgramacionWeb3Tp.Servicios
 {
     public class PedidoServicio
     {
-        private static PedidoEmpanadaCtx ctx = new PedidoEmpanadaCtx();
+        private static Pedidos ctx = new Pedidos();
 
         public Pedido ObtenerPedidoPorId(int? id)
         {
@@ -44,8 +44,8 @@ namespace ProgramacionWeb3Tp.Servicios
         public List<Pedido> ObtenerPedidosPorUsuario(int usuarioId)
         {
             var pedidos = (from l in ctx.Pedido
-                            where l.IdUsuario == usuarioId
-                            orderby l.Nombre ascending
+                            where l.IdUsuarioResponsable == usuarioId
+                            orderby l.NombreNegocio ascending
                             select l)
                             .ToList();
 
@@ -78,18 +78,18 @@ namespace ProgramacionWeb3Tp.Servicios
             }
         }
         
-       private Pedidos condb = new Pedidos();
+       //private Pedidos condb = new Pedidos();
 
-        public void SavePedido(Pedido pedido)
-        {
-            Pedido pedidoNuevo = null;
+        //public void SavePedido(Pedido pedido)
+        //{
+        //    Pedido pedidoNuevo = null;
             
-            pedidoNuevo = new Pedido(pedido);
+        //    pedidoNuevo = new Pedido();
 
-            condb.Pedido.Add(pedido);
-            condb.SaveChanges();
+        //    condb.Pedido.Add(pedido);
+        //    condb.SaveChanges();
 
                    
-        }
+        //}
     }
 }

@@ -23,13 +23,13 @@ namespace ProgramacionWeb3Tp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
-        public ActionResult RegistrarPedido(Pedido pedido)
+        public ActionResult RegistrarPedido(Pedido pedido,Usuario usuario)
         {
 
             if (ModelState.IsValid)
             {
 
-                _pedidoServicio.SavePedido(pedido);
+                _pedidoServicio.CrearPedido(pedido,usuario);
                 return View("iniciado");
 
             }
