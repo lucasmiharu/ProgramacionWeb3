@@ -11,6 +11,7 @@ namespace ProgramacionWeb3Tp.Servicios
     public class PedidoServicio
     {
         private static Pedidos ctx = new Pedidos();
+        private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
         public Pedido ObtenerPedidoPorId(int? id)
         {
@@ -21,25 +22,47 @@ namespace ProgramacionWeb3Tp.Servicios
             return pedido;
         }
 
-        public Pedido CrearPedido(Pedido dataPedido, Usuario usuarioActual)
+        public int GetNuevoId()
         {
+            var result = ctx.Pedido.Max(p => p.IdPedido);
 
-            Pedido nuevoPedido = new Pedido
-            {
-                IdPedido = dataPedido.IdPedido,
-                NombreNegocio = dataPedido.NombreNegocio,
-                Descripcion = dataPedido.Descripcion,
-                PrecioUnidad = dataPedido.PrecioUnidad,
-                PrecioDocena = dataPedido.PrecioDocena,
-                FechaCreacion = DateTime.Now
-            };
+            return result += 1;
+        }
 
-            usuarioActual.Pedido.Add(nuevoPedido);
+        public Pedido CrearPedido(Pedido dataPedido, String[] Invitados)
+        {   
+            Pedido nuevoPedido = new Pedido(dataPedido);
+
+            nuevoPedido.IdPedido = GetNuevoId();
+            
             ctx.Pedido.Add(nuevoPedido);
             ctx.SaveChanges();
-
+           
             return nuevoPedido;
+            
         }
+
+
+        public void SetInvitados(Pedido pedido, String[] Invitados)
+        {
+            int idUsr;
+                        
+            InvitacionPedido Invitacion = new InvitacionPedido();
+                                    
+            for (int i = 0; i < Invitados.Count(); i++)
+            {
+
+                int.TryParse(Invitados[i], out idUsr);
+
+                Invitacion.IdUsuario = idUsr;
+                Invitacion.IdPedido = pedido.IdPedido;
+
+                ctx.InvitacionPedido.Add(Invitacion);
+                ctx.SaveChanges();
+
+            }
+        }
+     
 
         public List<Pedido> ObtenerPedidosPorUsuario(int usuarioId)
         {

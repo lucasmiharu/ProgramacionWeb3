@@ -31,6 +31,15 @@ namespace ProgramacionWeb3Tp.Servicios
             return user;
         }
 
+        public List<Usuario> GetAll()
+        {
+
+            List <Usuario> users = (from u in condb.Usuario select u).ToList();
+
+            return users;
+
+        }
+
         public Usuario LoguearUsuario(Usuario usuario)
         {
             Usuario usuarioOK = new Usuario();

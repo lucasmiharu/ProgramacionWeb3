@@ -163,6 +163,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClsSesion.cs" />
+    <Compile Include="Models\Entities\Pedido.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
     <Compile Include="Models\EstadoPedido.cs">
       <DependentUpon>Pedido.tt</DependentUpon>
@@ -176,6 +177,7 @@
     <Compile Include="Models\InvitacionPedidoGustoEmpanadaUsuario.cs">
       <DependentUpon>Pedido.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\Metadata\UsuarioMetadata.cs" />
     <Compile Include="Models\Pedido.Context.cs">
       <AutoGen>True</AutoGen>
@@ -234,6 +236,7 @@
       <DependentUpon>Pedido.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\funciones.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
