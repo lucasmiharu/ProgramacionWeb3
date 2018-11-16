@@ -13,7 +13,7 @@ namespace ProgramacionWeb3Tp.Controllers
         private readonly PedidoServicio _pedidoServicio = new PedidoServicio();
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
-        [HttpGet]
+        [HttpGet]       
         public ActionResult iniciar()
         {
             
@@ -23,7 +23,18 @@ namespace ProgramacionWeb3Tp.Controllers
                      
             return View(pedido);
         }
-       
+
+        [HttpGet]        
+        public ActionResult Pedidos()
+        {
+
+          List  <Pedido> pedidos = new List<Pedido>();
+
+            pedidos = _pedidoServicio.ObtenerPedidosPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
+         
+            return View("Pedidos", pedidos);
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF

@@ -65,7 +65,7 @@ namespace Pedido_Empanadas.Controllers
                 //ClsSesion.GetUsuarioLogueado();
                 //ClsSesion.EliminarSesion();
 
-                return View("Login", usr);
+                return RedirectToAction("Pedidos","Pedidos");
                 }                                                   
 
         }

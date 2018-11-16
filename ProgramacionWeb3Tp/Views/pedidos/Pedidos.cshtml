@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ProgramacionWeb3Tp.Models.Pedido>
+
+<h2>Pedidos</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreNegocio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioUnidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioDocena)
+        </th>
+        <th>
+            @Html.DisplayName("Fecha de Creacion")
+        </th>
+        <th>
+            @Html.DisplayName("Fecha de Modificacion")
+        </th>
+        <th>
+            @Html.DisplayName("Estado")
+        </th>
+        <th>
+            @Html.DisplayName("Usuario creador")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreNegocio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecioUnidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecioDocena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoPedido.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.IdPedido }) |           
+            @Html.ActionLink("Borrar", "Borrar", new { id=item.IdPedido })
+        </td>
+    </tr>
+}
+
+</table>
