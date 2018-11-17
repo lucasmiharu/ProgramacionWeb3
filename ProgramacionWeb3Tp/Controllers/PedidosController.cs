@@ -19,8 +19,10 @@ namespace ProgramacionWeb3Tp.Controllers
             
             Pedido pedido = new Pedido();
             List<Usuario> invitados = _usuarioServicio.GetAll();
+            List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
             ViewBag.invitados = invitados;
-                     
+            ViewBag.gustos = gustos;
+
             return View(pedido);
         }
 
@@ -48,9 +50,10 @@ namespace ProgramacionWeb3Tp.Controllers
                                 
                nuevo= _pedidoServicio.CrearPedido(pedido, Request["SelecInvitados"].Split(','));
                 _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
+                _pedidoServicio.SetGustos(nuevo, Request["SelecGustos"].Split(','));
 
                 ViewBag.mensaje = "Se genero el pedido nro: " + nuevo.IdPedido;
-                return View("iniciado");
+                return RedirectToAction("Pedidos");
 
             }
             else

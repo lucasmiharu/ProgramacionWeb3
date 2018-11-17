@@ -48,20 +48,34 @@
                                 </div>
 
 
-                                <div id="ListInvitados"  class="form-group">
+                                <div id="ListInvitados" class="form-group">
                                     <h3>Seleccion de Invitados</h3> <BR>
 
-                                     @if ((ViewBag.invitados!=null))
+                                    @if ((ViewBag.invitados != null))
 
-                                    {  foreach (Usuario item in ViewBag.invitados)
                                     {
-                                        <input type="checkbox" name="SelecInvitados" id="@item.IdUsuario" value="@item.IdUsuario" />@item.Email
-                                        <BR/>}
+                                        foreach (Usuario item in ViewBag.invitados)
+                                        {
+                                            <input type="checkbox" name="SelecInvitados" id="@item.IdUsuario" value="@item.IdUsuario" />@item.Email
+                                            <BR />}
+                                    }
+                                </div>
+
+                                <div id="ListInvitados" class="form-group">
+                                    <h3>Seleccion de Gustos disponibles</h3> <BR>
+
+                                    @if ((ViewBag.gustos != null))
+
+                                    {
+                                        foreach (GustoEmpanada item in ViewBag.gustos)
+                                        {
+                                            <input type="checkbox" name="SelecGustos" id="@item.IdGustoEmpanada" value="@item.IdGustoEmpanada" />@item.Nombre
+                                            <BR />}
                                     }
                                 </div>
 
 
-                                <input type="submit" name="submit" class="btn btn-info" value="Iniciar pedido" onClick ="return true;"/>
+                                <input type="submit" name="submit" class="btn btn-info" value="Iniciar pedido" onClick="return true;" />
 
 
                             </div>

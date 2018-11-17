@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
-
+using System.Data.Entity;
 
 namespace ProgramacionWeb3Tp.Servicios
 {
@@ -62,7 +62,30 @@ namespace ProgramacionWeb3Tp.Servicios
 
             }
         }
-     
+
+        public void SetGustos(Pedido pedido, String[] Gustos)
+        {
+                                   
+            List<GustoEmpanada> gustos = new List<GustoEmpanada>();
+            GustoEmpanada gusto = new GustoEmpanada();
+            
+            for (int i = 0; i < Gustos.Count(); i++)
+            {
+                gusto = GetGustoEmpanada(int.Parse(Gustos[i]));
+                gustos.Add(gusto);
+
+            }
+
+            pedido.GustoEmpanada = gustos;
+            
+            var entry = ctx.Entry(pedido);
+            entry.State = EntityState.Modified;
+
+            ctx.SaveChanges();                      
+                        
+        }
+
+
 
         public List<Pedido> ObtenerPedidosPorUsuario(int usuarioId)
         {
@@ -73,6 +96,26 @@ namespace ProgramacionWeb3Tp.Servicios
                             .ToList();
 
             return pedidos;
+        }
+
+        public List<GustoEmpanada> GetGustoEmpanadas()
+        {
+            var gustos = (from l in ctx.GustoEmpanada
+                          orderby l.Nombre ascending
+                           select l)
+                            .ToList();
+
+            return gustos;
+        }
+
+        public GustoEmpanada GetGustoEmpanada(int id)
+        {
+            var gusto = (from l in ctx.GustoEmpanada
+                          where l.IdGustoEmpanada==id                          
+                          select l)
+                            .FirstOrDefault();
+
+            return gusto;
         }
 
         public Pedido EditarPedidoExistente(Pedido pedido)
