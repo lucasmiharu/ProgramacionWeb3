@@ -60,11 +60,18 @@ namespace ProgramacionWeb3Tp.Controllers
             {
                 List<Usuario> invitados = _usuarioServicio.GetAll();
                 ViewBag.invitados = invitados;
-                return View("iniciar",pedido);
-              
+                return View("iniciar",pedido);          
 
             }
         }
+        [HttpPost]
+        public ActionResult EliminarPedido(int id)
+        {
+            PedidoServicio PS = new PedidoServicio();
+            Pedido pedido = new Pedido();
 
+            PS.EliminarPedido(id);
+            return View("Pedidos", pedido);
+        }
     }
 }
