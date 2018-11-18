@@ -39,7 +39,9 @@
             <p align="center">&copy; @DateTime.Now.Year - @ViewBag.Title</p>
         </footer>
     </div>
-
+    <script>
+        $('.multipleSelect').fastselect();
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

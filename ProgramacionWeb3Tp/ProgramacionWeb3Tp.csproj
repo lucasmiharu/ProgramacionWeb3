@@ -209,6 +209,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\build.min.css" />
+    <Content Include="Content\dataTables.bootstrap.css" />
+    <Content Include="Content\fastselect.css" />
+    <Content Include="Content\fastselect.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -235,13 +239,24 @@
     <Content Include="Models\Pedido.edmx.diagram">
       <DependentUpon>Pedido.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\fastselect.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\build.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap.js" />
+    <Content Include="Scripts\fastsearch.js" />
+    <Content Include="Scripts\fastsearch.min.js" />
+    <Content Include="Scripts\fastselect.js" />
+    <Content Include="Scripts\fastselect.min.js" />
+    <Content Include="Scripts\fastselect.standalone.js" />
+    <Content Include="Scripts\fastselect.standalone.min.js" />
+    <Content Include="Scripts\fastselectt.js" />
     <Content Include="Scripts\funciones.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

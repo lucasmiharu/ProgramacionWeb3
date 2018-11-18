@@ -9,6 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/fastselect.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/fastselect.min.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -42,7 +44,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/carrito.js")
+
+    @Scripts.Render("~/Scripts/fastselect.js")
+    @Scripts.Render("~/Scripts/fastselect.min.js")
+    @Scripts.Render("~/Scripts/fastselect.standalone.js")
+    @Scripts.Render("~/Scripts/fastselect.standalone.min.js")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

@@ -7,8 +7,22 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/build.min.js")
+    @Scripts.Render("~/Scripts/fastselect.standalone.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap.js")
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    <link href="@Url.Content("~/Content/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />       
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/build.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/fastselect.min.css")" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
 </head>
 <body>
 
@@ -46,10 +60,6 @@
                         <li>@Html.ActionLink("Salir", "Salir", "Home")</li>
                     </ul>
 
-
-
-
-
                 </div>
 
             </div>
@@ -65,8 +75,11 @@
             <p align="center">&copy; @DateTime.Now.Year - @ViewBag.Title</p>
         </footer>
     </div>
+    <script>
 
-    @Scripts.Render("~/bundles/jquery")
+        $('.multipleSelect').fastselect();
+
+    </script>
     @Scripts.Render("~/bundles/funcionesPropias")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
