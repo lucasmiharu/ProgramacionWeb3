@@ -291,6 +291,7 @@
     <Content Include="Views\Pedidos\lista.cshtml" />
     <Content Include="Views\Home\Productos.cshtml" />
     <Content Include="Views\Pedidos\Pedidos.cshtml" />
+    <Content Include="Views\Pedidos\invitaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

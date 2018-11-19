@@ -98,6 +98,18 @@ namespace ProgramacionWeb3Tp.Servicios
             return pedidos;
         }
 
+        public List<Pedido> ObtenerInvitacionesPorUsuario(int usuarioId)
+        {
+            var pedidos = (from I in ctx.InvitacionPedido
+                           join P in ctx.Pedido on I.IdPedido equals P.IdPedido
+                           where I.IdUsuario == usuarioId
+                           orderby I.IdPedido ascending
+                           select P)
+                            .ToList();
+            return pedidos;
+        }
+
+
         public List<GustoEmpanada> GetGustoEmpanadas()
         {
             var gustos = (from l in ctx.GustoEmpanada
@@ -139,23 +151,11 @@ namespace ProgramacionWeb3Tp.Servicios
             if (pedido != null)
             {
                 ctx.Pedido.Remove(pedido);
+             
 
                 ctx.SaveChanges();
             }
         }
-        
-       //private Pedidos condb = new Pedidos();
-
-        //public void SavePedido(Pedido pedido)
-        //{
-        //    Pedido pedidoNuevo = null;
-            
-        //    pedidoNuevo = new Pedido();
-
-        //    condb.Pedido.Add(pedido);
-        //    condb.SaveChanges();
-
-                   
-        //}
+     
     }
 }
