@@ -13,10 +13,10 @@ namespace ProgramacionWeb3Tp.Controllers
         private readonly PedidoServicio _pedidoServicio = new PedidoServicio();
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
-        [HttpGet]       
+        [HttpGet]
         public ActionResult iniciar()
         {
-            
+
             Pedido pedido = new Pedido();
             List<Usuario> invitados = _usuarioServicio.GetAll();
             List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
@@ -26,19 +26,19 @@ namespace ProgramacionWeb3Tp.Controllers
             return View(pedido);
         }
 
-        [HttpGet]        
+        [HttpGet]
         public ActionResult Pedidos(String Copia)
         {
 
-          List  <Pedido> pedidos = new List<Pedido>();
-                       
+            List<Pedido> pedidos = new List<Pedido>();
+
             pedidos = _pedidoServicio.ObtenerPedidosPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
-            
-            if (Copia=="S")
+
+            if (Copia == "S")
                 ViewBag.ModoCopia = "S";
             else
-                ViewBag.ModoCopia = "N";           
-            
+                ViewBag.ModoCopia = "N";
+
             return View("Pedidos", pedidos);
         }
 
@@ -58,14 +58,14 @@ namespace ProgramacionWeb3Tp.Controllers
         public ActionResult Copiar(int id)
         {
             Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);
-                                    
+
             List<Usuario> invitados = _usuarioServicio.GetAll();
             List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
             ViewBag.invitados = invitados;
-            ViewBag.gustos = gustos;    
+            ViewBag.gustos = gustos;
 
-            return View("copiar",pedido);
-          
+            return View("copiar", pedido);
+
         }
 
 
@@ -76,10 +76,10 @@ namespace ProgramacionWeb3Tp.Controllers
             Pedido nuevo;
 
 
-            if (ModelState.IsValid &&  Request["SelecInvitados"]!=null)
+            if (ModelState.IsValid && Request["SelecInvitados"] != null)
             {
-                                
-               nuevo= _pedidoServicio.CrearPedido(pedido, Request["SelecInvitados"].Split(','));
+
+                nuevo = _pedidoServicio.CrearPedido(pedido, Request["SelecInvitados"].Split(','));
                 _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
                 _pedidoServicio.SetGustos(nuevo, Request["SelecGustos"].Split(','));
 
@@ -93,7 +93,7 @@ namespace ProgramacionWeb3Tp.Controllers
                 List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
                 ViewBag.invitados = invitados;
                 ViewBag.gustos = gustos;
-                return View("iniciar",pedido);          
+                return View("iniciar", pedido);
 
             }
         }
@@ -106,6 +106,33 @@ namespace ProgramacionWeb3Tp.Controllers
             PS.EliminarPedido(pedidoId);
             return View("Pedidos", pedido);
         }
-    }
 
+
+        [HttpGet]
+        public ActionResult EditarPedido(int id)
+        {
+            Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);
+
+            List<Usuario> invitados = _usuarioServicio.GetAll();
+            List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
+            ViewBag.invitados = invitados;
+            ViewBag.gustos = gustos;
+
+            return View("editar", pedido);
+        }
+
+        [HttpPost]
+        public ActionResult EditarPedido(Pedido pedido, Usuario usuario, GustoEmpanada gustoEmpanada)
+        {
+            if (pedido.EstadoPedido.Equals("Cerrado"))
+            {
+                return View("detalle", pedido);
+            }
+            else
+            {
+                Pedido pedidoActualizad = _pedidoServicio.EditarPedidoExistente(pedido, usuario, gustoEmpanada);
+                return View("Pedidos", pedidoActualizad);
+            }
+        }
+    }
 }

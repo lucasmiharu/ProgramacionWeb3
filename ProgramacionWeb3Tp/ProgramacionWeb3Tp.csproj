@@ -292,6 +292,7 @@
     <Content Include="Views\Home\Productos.cshtml" />
     <Content Include="Views\Pedidos\Pedidos.cshtml" />
     <Content Include="Views\Pedidos\invitaciones.cshtml" />
+    <Content Include="Views\Pedidos\editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
