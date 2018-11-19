@@ -17,8 +17,7 @@ namespace ProgramacionWeb3Tp.Servicios
         {
             Pedido pedido = (from u in ctx.Pedido
                              where u.IdPedido == id
-                             select u)
-                               .FirstOrDefault();
+                             select u).FirstOrDefault();
             return pedido;
         }
 
@@ -73,17 +72,35 @@ namespace ProgramacionWeb3Tp.Servicios
             {
                 gusto = GetGustoEmpanada(int.Parse(Gustos[i]));
                 gustos.Add(gusto);
-
             }
-
             pedido.GustoEmpanada = gustos;
             
             var entry = ctx.Entry(pedido);
             entry.State = EntityState.Modified;
 
-            ctx.SaveChanges();                      
-                        
+            ctx.SaveChanges();               
         }
+
+        public void EliminarGustosporPedido(Pedido pedido)
+        {
+            //GustoEmpanada Gusto = new GustoEmpanada();
+
+           foreach (GustoEmpanada gusto in pedido.GustoEmpanada)            
+            {                
+             ctx.GustoEmpanada.Remove(gusto);
+             ctx.SaveChanges();                
+            }
+        }
+
+        public void EliminarInvitacionesporPedido(Pedido pedido)
+        {
+            foreach (InvitacionPedido invitacion in pedido.InvitacionPedido)
+            {
+                ctx.InvitacionPedido.Remove(invitacion);
+                ctx.SaveChanges();
+            }
+        }
+
 
 
 
@@ -144,7 +161,7 @@ namespace ProgramacionWeb3Tp.Servicios
 
             return pedidoActualizado;
         }
-
+      
         public void EliminarPedido(int pedidoId)
         {
             Pedido pedido = ObtenerPedidoPorId(pedidoId);

@@ -94,7 +94,6 @@ namespace ProgramacionWeb3Tp.Controllers
                 ViewBag.invitados = invitados;
                 ViewBag.gustos = gustos;
                 return View("iniciar", pedido);
-
             }
         }
 
@@ -137,24 +136,23 @@ namespace ProgramacionWeb3Tp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
         public ActionResult EditarPedido(Pedido pedido)
-        {
-            Pedido nuevo;
+        {         
 
             //si eligio invitados y gustos sigo
             if (ModelState.IsValid && Request["SelecInvitados"] != null && Request["SelecGustos"] != null)
             {
                 //solo editar el pedido
-                nuevo = _pedidoServicio.EditarPedidoExistente(pedido);
+               Pedido nuevo = _pedidoServicio.EditarPedidoExistente(pedido);
 
-                //crear servicio para actualizar invitados (borrar los que hay y guardarlos de nuevo)
-                _pedidoServicio.ActualizarInvitados(nuevo, Request["SelecInvitados"].Split(','));
-
-                //crear servicio para actualizar gustos (borrar los que hay y guardarlos de nuevo)
-                _pedidoServicio.ActualizarGustos(nuevo, Request["SelecGustos"].Split(','));
+                _pedidoServicio.EliminarInvitacionesporPedido(nuevo);
+                _pedidoServicio.EliminarGustosporPedido(nuevo);                
+              
+                _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
+                                
+                _pedidoServicio.SetGustos(nuevo, Request["SelecGustos"].Split(','));
 
                 ViewBag.mensaje = "Se edito el pedido nro: " + nuevo.IdPedido;
                 return RedirectToAction("Pedidos");
-
             }
             else
             {
@@ -163,7 +161,6 @@ namespace ProgramacionWeb3Tp.Controllers
                 ViewBag.invitados = invitados;
                 ViewBag.gustos = gustos;
                 return View("iniciar", pedido);
-
             }
         }
 
