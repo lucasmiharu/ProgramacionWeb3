@@ -37,6 +37,17 @@ namespace ProgramacionWeb3Tp.Controllers
             return View("Pedidos", pedidos);
         }
 
+        [HttpGet]
+        public ActionResult Invitaciones()
+        {
+
+            List<Pedido> pedidos = new List<Pedido>();
+
+            pedidos = _pedidoServicio.ObtenerInvitacionesPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
+
+            return View("Invitaciones", pedidos);
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
@@ -60,18 +71,20 @@ namespace ProgramacionWeb3Tp.Controllers
             {
                 List<Usuario> invitados = _usuarioServicio.GetAll();
                 ViewBag.invitados = invitados;
-                return View("iniciar",pedido);          
+                return View("iniciar",pedido);
+              
 
             }
         }
         [HttpPost]
-        public ActionResult EliminarPedido(int id)
+        public ActionResult EliminarPedido(int pedidoId)
         {
             PedidoServicio PS = new PedidoServicio();
             Pedido pedido = new Pedido();
 
-            PS.EliminarPedido(id);
+            PS.EliminarPedido(pedidoId);
             return View("Pedidos", pedido);
         }
     }
+
 }
