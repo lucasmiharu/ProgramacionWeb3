@@ -130,16 +130,14 @@ namespace ProgramacionWeb3Tp.Servicios
             return gusto;
         }
 
-        public Pedido EditarPedidoExistente(Pedido pedido, Usuario usuario, GustoEmpanada gustoEmpanada)
+        public Pedido EditarPedidoExistente(Pedido pedido)
         {
             Pedido pedidoActualizado = ObtenerPedidoPorId(pedido.IdPedido);
 
             pedidoActualizado.NombreNegocio = pedido.NombreNegocio;
             pedidoActualizado.Descripcion = pedido.Descripcion;
             pedidoActualizado.PrecioDocena = pedido.PrecioDocena;
-            pedidoActualizado.PrecioUnidad = pedido.PrecioUnidad;
-            pedidoActualizado.Usuario.Email = usuario.Email;
-            pedidoActualizado.GustoEmpanada.Equals(gustoEmpanada.Nombre);
+            pedidoActualizado.PrecioUnidad = pedido.PrecioUnidad;          
             pedidoActualizado.FechaModificacion = DateTime.Now;
 
             ctx.SaveChanges();

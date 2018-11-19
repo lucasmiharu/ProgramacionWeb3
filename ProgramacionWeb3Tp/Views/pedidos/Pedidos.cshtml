@@ -31,18 +31,14 @@
                 <td>@Html.DisplayFor(modelItem => item.EstadoPedido.Nombre)</td>
                 <td>
                     @if ((ViewBag.ModoCopia != null && ViewBag.ModoCopia == "S"))
-    {
-                @Html.ActionLink("Copiar", "Copiar", new { id = item.IdPedido }, new { @class = "btn btn-danger btn-md btn-block" })
-
-                @Html.ActionLink("Editar", "EditarPedido", new { id = item.IdPedido }, new { @class = "btn btn-danger btn-md btn-block" })
-}
-else
-{
-                @Html.ActionLink("Copiar", "Copiar", new { id = item.IdPedido }, new { @class = "btn btn-danger btn-md btn-block" })
-
-                @Html.ActionLink("Editar", "EditarPedido", new { id = item.IdPedido }, new { @class = "btn btn-danger btn-md btn-block" })
-
-                <a href="#my_modal" class="btn btn-danger btn-xs" data-toggle="modal" data-pedido-id="@Html.DisplayFor(modelItem => item.IdPedido)"><span class="glyphicon glyphicon-trash"></span></a>}
+                    {
+                        @Html.ActionLink("Copiar", "Copiar", new { id = item.IdPedido }, new { @class = "btn btn-danger btn-md btn-block" })
+                    }
+                    else
+                    {          
+                       
+                        @Html.ActionLink("Editar", "EditarPedido", new { id = item.IdPedido }, new { @class = "btn btn-info btn-xs" })
+                        <a href="#my_modal" class="btn btn-danger btn-xs" data-toggle="modal" data-pedido-id="@Html.DisplayFor(modelItem => item.IdPedido)"><span class="glyphicon glyphicon-trash"></span></a>}
                 </td>
             </tr>
         }

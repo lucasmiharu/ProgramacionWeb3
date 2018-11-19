@@ -97,6 +97,7 @@ namespace ProgramacionWeb3Tp.Controllers
 
             }
         }
+
         [HttpPost]
         public ActionResult EliminarPedido(int pedidoId)
         {
@@ -131,20 +132,42 @@ namespace ProgramacionWeb3Tp.Controllers
 
         }
 
-    }
+    
 
         [HttpPost]
-        public ActionResult EditarPedido(Pedido pedido, Usuario usuario, GustoEmpanada gustoEmpanada)
+        [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
+        public ActionResult EditarPedido(Pedido pedido)
         {
-            if (pedido.EstadoPedido.Equals("Cerrado"))
+            Pedido nuevo;
+
+            //si eligio invitados y gustos sigo
+            if (ModelState.IsValid && Request["SelecInvitados"] != null && Request["SelecGustos"] != null)
             {
-                return View("detalle", pedido);
+                //solo editar el pedido
+                nuevo = _pedidoServicio.EditarPedidoExistente(pedido);
+
+                //crear servicio para actualizar invitados (borrar los que hay y guardarlos de nuevo)
+                _pedidoServicio.ActualizarInvitados(nuevo, Request["SelecInvitados"].Split(','));
+
+                //crear servicio para actualizar gustos (borrar los que hay y guardarlos de nuevo)
+                _pedidoServicio.ActualizarGustos(nuevo, Request["SelecGustos"].Split(','));
+
+                ViewBag.mensaje = "Se edito el pedido nro: " + nuevo.IdPedido;
+                return RedirectToAction("Pedidos");
+
             }
             else
             {
-                Pedido pedidoActualizad = _pedidoServicio.EditarPedidoExistente(pedido, usuario, gustoEmpanada);
-                return View("Pedidos", pedidoActualizad);
+                List<Usuario> invitados = _usuarioServicio.GetAll();
+                List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
+                ViewBag.invitados = invitados;
+                ViewBag.gustos = gustos;
+                return View("iniciar", pedido);
+
             }
         }
+
+
+
     }
 }
