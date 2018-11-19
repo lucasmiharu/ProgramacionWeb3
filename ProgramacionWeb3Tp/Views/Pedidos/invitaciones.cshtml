@@ -31,7 +31,7 @@
             <td>@Html.DisplayFor(modelItem => item.EstadoPedido.Nombre)</td>
             <td>@Html.DisplayFor(modelItem => item.Usuario.Email)</td>
             <td>
-                @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id = item.IdPedido }, new { @class = "btn btn-danger btn-md btn-block" })
+                @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id = item.IdPedido }, new { @class = "btn btn-warning btn-md btn-block" })
             </td>
         </tr>
         }

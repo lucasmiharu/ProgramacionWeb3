@@ -147,10 +147,10 @@ namespace ProgramacionWeb3Tp.Controllers
                 nuevo = _pedidoServicio.EditarPedidoExistente(pedido);
 
                 //crear servicio para actualizar invitados (borrar los que hay y guardarlos de nuevo)
-                _pedidoServicio.ActualizarInvitados(nuevo, Request["SelecInvitados"].Split(','));
+                //_pedidoServicio.ActualizarInvitados(nuevo, Request["SelecInvitados"].Split(','));
 
                 //crear servicio para actualizar gustos (borrar los que hay y guardarlos de nuevo)
-                _pedidoServicio.ActualizarGustos(nuevo, Request["SelecGustos"].Split(','));
+                //_pedidoServicio.ActualizarGustos(nuevo, Request["SelecGustos"].Split(','));
 
                 ViewBag.mensaje = "Se edito el pedido nro: " + nuevo.IdPedido;
                 return RedirectToAction("Pedidos");

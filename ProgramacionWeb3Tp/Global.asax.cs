@@ -17,5 +17,11 @@ namespace ProgramacionWeb3Tp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
+            Server.TransferRequest("/Home/Error");
+        }
+
     }
 }
