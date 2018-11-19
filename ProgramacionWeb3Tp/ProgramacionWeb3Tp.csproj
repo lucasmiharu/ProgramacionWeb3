@@ -283,7 +283,7 @@
     <Content Include="Views\Shared\_AnonimoLayout.cshtml" />
     <Content Include="Views\Shared\_UsuarioLayout.cshtml" />
     <Content Include="Views\Pedidos\detalle.cshtml" />
-    <Content Include="Views\Pedidos\editar.cshtml" />
+    <Content Include="Views\Pedidos\copiar.cshtml" />
     <Content Include="Views\Pedidos\elegir.cshtml" />
     <Content Include="Views\Pedidos\eliminar.cshtml" />
     <Content Include="Views\Pedidos\iniciado.cshtml" />

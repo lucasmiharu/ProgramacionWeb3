@@ -49,10 +49,10 @@
                             <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hace tu pedido!  <span class="caret"></span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                                 @Html.ActionLink("Pedido desde Cero", "Iniciar", "Pedidos", new { area = "" }, new { @class = "btn btn-success btn-block" })
-                                @Html.ActionLink("Copiar Pedido", "Index", "Home", new { area = "" }, new { @class = "btn btn-info btn-block" })
+                                @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos",  new { area = "",  Copia = "S"  }, new { @class = "btn btn-info btn-block"})
                             </div>
                         </li>
-                        <li>@Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos")</li>
+                        <li>@Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos", new { @class = "btn btn-info btn-block" })</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 

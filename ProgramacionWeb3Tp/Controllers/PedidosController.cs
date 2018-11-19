@@ -27,14 +27,34 @@ namespace ProgramacionWeb3Tp.Controllers
         }
 
         [HttpGet]        
-        public ActionResult Pedidos()
+        public ActionResult Pedidos(String Copia)
         {
 
           List  <Pedido> pedidos = new List<Pedido>();
-
+                       
             pedidos = _pedidoServicio.ObtenerPedidosPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
-         
+            
+            if (Copia=="S")
+                ViewBag.ModoCopia = "S";
+            else
+                ViewBag.ModoCopia = "N";           
+            
             return View("Pedidos", pedidos);
+        }
+
+
+        [HttpGet]
+        public ActionResult Copiar(int id)
+        {
+            Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);
+                                    
+            List<Usuario> invitados = _usuarioServicio.GetAll();
+            List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
+            ViewBag.invitados = invitados;
+            ViewBag.gustos = gustos;    
+
+            return View("copiar",pedido);
+          
         }
 
 
@@ -59,7 +79,9 @@ namespace ProgramacionWeb3Tp.Controllers
             else
             {
                 List<Usuario> invitados = _usuarioServicio.GetAll();
+                List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
                 ViewBag.invitados = invitados;
+                ViewBag.gustos = gustos;
                 return View("iniciar",pedido);          
 
             }
