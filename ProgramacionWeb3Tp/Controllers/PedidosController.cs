@@ -129,9 +129,7 @@ namespace ProgramacionWeb3Tp.Controllers
 
             return View("elegir", pedido);
 
-        }
-
-    
+        }    
 
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
