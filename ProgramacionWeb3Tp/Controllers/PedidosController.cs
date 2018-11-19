@@ -50,7 +50,7 @@ namespace ProgramacionWeb3Tp.Controllers
 
             pedidos = _pedidoServicio.ObtenerInvitacionesPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
 
-            return View("Invitaciones", pedidos);
+            return View("invitaciones", pedidos);
         }
 
 
@@ -106,6 +106,17 @@ namespace ProgramacionWeb3Tp.Controllers
             PS.EliminarPedido(pedidoId);
             return View("Pedidos", pedido);
         }
+
+    
+        public ActionResult ElegirGustos(int id)
+
+        {
+            Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);         
+
+            return View("elegir", pedido);
+
+        }
+
     }
 
 }
