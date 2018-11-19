@@ -217,6 +217,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\emp\carne.jpg" />
+    <Content Include="images\emp\humita.jpg" />
+    <Content Include="images\emp\jamonyqueso.jpg" />
+    <Content Include="images\emp\pollo.jpg" />
+    <Content Include="images\emp\quesoycebolla.jpg" />
+    <Content Include="images\emp\verdura.jpg" />
+    <Content Include="images\sort_asc.png" />
+    <Content Include="images\sort_asc_disabled.png" />
+    <Content Include="images\sort_both.png" />
+    <Content Include="images\sort_desc.png" />
+    <Content Include="images\sort_desc_disabled.png" />
     <Content Include="Models\Pedido.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pedido.Context.cs</LastGenOutput>
@@ -283,7 +294,7 @@
     <Content Include="Views\Shared\_AnonimoLayout.cshtml" />
     <Content Include="Views\Shared\_UsuarioLayout.cshtml" />
     <Content Include="Views\Pedidos\detalle.cshtml" />
-    <Content Include="Views\Pedidos\copiar.cshtml" />
+    <Content Include="Views\Pedidos\editar.cshtml" />
     <Content Include="Views\Pedidos\elegir.cshtml" />
     <Content Include="Views\Pedidos\eliminar.cshtml" />
     <Content Include="Views\Pedidos\iniciado.cshtml" />
@@ -292,7 +303,7 @@
     <Content Include="Views\Home\Productos.cshtml" />
     <Content Include="Views\Pedidos\Pedidos.cshtml" />
     <Content Include="Views\Pedidos\invitaciones.cshtml" />
-    <Content Include="Views\Pedidos\editar.cshtml" />
+    <Content Include="Views\Pedidos\copiar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

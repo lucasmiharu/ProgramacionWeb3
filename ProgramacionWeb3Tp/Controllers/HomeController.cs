@@ -21,6 +21,13 @@ namespace Pedido_Empanadas.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Error()
+        {
+            
+            return View();
+        }
+
         public ActionResult Productos()
         {
             return View();
