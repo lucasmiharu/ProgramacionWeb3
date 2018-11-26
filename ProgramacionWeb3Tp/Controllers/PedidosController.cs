@@ -142,8 +142,8 @@ namespace ProgramacionWeb3Tp.Controllers
                 //solo editar el pedido
                Pedido nuevo = _pedidoServicio.EditarPedidoExistente(pedido);
 
-                _pedidoServicio.EliminarInvitacionesporPedido(nuevo);
-                _pedidoServicio.EliminarGustosporPedido(nuevo);                
+                _pedidoServicio.EliminarInvitacionesporPedido(pedido);
+                _pedidoServicio.EliminarGustosporPedido(pedido);                
               
                 _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
                                 
