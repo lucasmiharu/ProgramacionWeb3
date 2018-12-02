@@ -49,7 +49,7 @@
                             <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hace tu pedido!  <span class="caret"></span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                                 @Html.ActionLink("Pedido desde Cero", "Iniciar", "Pedidos", new { area = "" }, new { @class = "btn btn-success btn-block" })
-                                @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos",  new { area = "",  Copia = "S"  }, new { @class = "btn btn-info btn-block"})
+                                @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos", new { area = "", Copia = "S" }, new { @class = "btn btn-info btn-block" })
                             </div>
                         </li>
                         <li>@Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos")</li>
@@ -82,10 +82,16 @@
 
     </script>
     <script>
-        $('#my_modal').on('show.bs.modal', function(e) {
+        $('#modalCierre').on('show.bs.modal', function (e) {
             var pedidoId = $(e.relatedTarget).data('pedido-id');
             $(e.currentTarget).find('input[name="pedidoId"]').val(pedidoId);
-});
+        });
+    </script>
+    <script>
+        $('#modalEliminar').on('show.bs.modal', function (e) {
+            var pedidoId = $(e.relatedTarget).data('pedido-id');
+            $(e.currentTarget).find('input[name="pedidoId"]').val(pedidoId);
+        });
     </script>
     @Scripts.Render("~/bundles/funcionesPropias")
     @Scripts.Render("~/bundles/bootstrap")

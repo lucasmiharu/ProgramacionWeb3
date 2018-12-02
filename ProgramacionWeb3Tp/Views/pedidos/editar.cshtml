@@ -36,6 +36,7 @@
                                 <div class="row setup-content" id="step-1">
                                     <h3>Datos del pedido</h3>
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.IdPedido)
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "text-info" })
                                         @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })

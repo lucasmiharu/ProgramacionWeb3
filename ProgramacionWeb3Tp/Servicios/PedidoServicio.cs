@@ -13,7 +13,7 @@ namespace ProgramacionWeb3Tp.Servicios
         private static Pedidos ctx = new Pedidos();
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
-        public Pedido ObtenerPedidoPorId(int? id)
+        public Pedido ObtenerPedidoPorId(int id)
         {
             Pedido pedido = (from u in ctx.Pedido
                              where u.IdPedido == id
@@ -126,7 +126,7 @@ namespace ProgramacionWeb3Tp.Servicios
             return pedidos;
         }
 
-
+        
         public List<GustoEmpanada> GetGustoEmpanadas()
         {
             var gustos = (from l in ctx.GustoEmpanada
@@ -173,6 +173,19 @@ namespace ProgramacionWeb3Tp.Servicios
                 ctx.SaveChanges();
             }
         }
-     
+
+        public Pedido FinalizarPedido(int pedidoId)
+        {
+            Pedido pedidoActualizado = ObtenerPedidoPorId(pedidoId);
+
+
+            pedidoActualizado.IdEstadoPedido = 2;
+            pedidoActualizado.FechaModificacion = DateTime.Now;
+            ctx.SaveChanges();
+
+             return pedidoActualizado;
+           
+        }
+
     }
 }

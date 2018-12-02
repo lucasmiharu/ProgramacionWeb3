@@ -104,7 +104,15 @@ namespace ProgramacionWeb3Tp.Controllers
             Pedido pedido = new Pedido();
 
             PS.EliminarPedido(pedidoId);
-            return View("Pedidos", pedido);
+            //return View("Pedidos", pedido);
+            return RedirectToAction("Pedidos");
+        }
+
+        [HttpPost]
+        public ActionResult FinalizarPedido(int pedidoId)
+        {
+            _pedidoServicio.FinalizarPedido(pedidoId);
+            return RedirectToAction("Pedidos");
         }
 
 
