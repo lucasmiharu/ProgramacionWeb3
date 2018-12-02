@@ -117,19 +117,32 @@ namespace ProgramacionWeb3Tp.Controllers
 
 
         [HttpGet]
-        public ActionResult EditarPedido(int id)
+        public ActionResult EditarPedido(int id, string estado)
         {
             Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);
 
-            List<Usuario> invitados = _usuarioServicio.GetAll();
-            List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
-            ViewBag.invitados = invitados;
-            ViewBag.gustos = gustos;
+            if (estado != "Cerrado")
+            {
+                List<Usuario> invitados = _usuarioServicio.GetAll();
+                List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
+                ViewBag.invitados = invitados;
+                ViewBag.gustos = gustos;
 
-            return View("editar", pedido);
+                return View("editar", pedido);
+            }
+            else
+            {
+                return RedirectToAction("Detalle", pedido);
+            }
         }
 
-    
+        public ActionResult Detalle(Pedido pedido)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+
+            return View("detalle", pedido);
+        }
+
         public ActionResult ElegirGustos(int id)
 
         {
@@ -191,6 +204,5 @@ namespace ProgramacionWeb3Tp.Controllers
         {
             return View();
         }
-
     }
 }
