@@ -186,6 +186,13 @@ namespace ProgramacionWeb3Tp.Servicios
              return pedidoActualizado;
            
         }
+       
+        public Pedido DetallePedido(int idPedido)
+        {
+            Pedido detallePedido = ObtenerPedidoPorId(idPedido);
 
+            return detallePedido;
+
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace ProgramacionWeb3Tp.Controllers
             return View("invitaciones", pedidos);
         }
 
-
+       
         [HttpGet]
         public ActionResult Copiar(int id)
         {
@@ -170,7 +170,27 @@ namespace ProgramacionWeb3Tp.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Detalle(int idPedido)
+        {
 
+            Pedido detallepedido = new Pedido();
+
+            detallepedido = _pedidoServicio.DetallePedido(idPedido);
+            if (detallepedido.IdEstadoPedido == 2)
+            {
+                return View("Detalle", detallepedido);
+            }
+            else
+            {
+                return RedirectToAction("PedidoNoFinalizado");
+            }
+        }
+        [HttpGet]
+        public ActionResult PedidoNoFinalizado()
+        {
+            return View();
+        }
 
     }
 }

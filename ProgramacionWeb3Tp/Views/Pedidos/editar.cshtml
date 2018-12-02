@@ -36,7 +36,7 @@
                                 <div class="row setup-content" id="step-1">
                                     <h3>Datos del pedido</h3>
                                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.IdPedido, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
+                                    @Html.HiddenFor(model => model.IdPedido)
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "text-info" })
                                         @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
@@ -57,6 +57,7 @@
                                         @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
                                         @Html.ValidationMessageFor(model => model.PrecioDocena, "", new { @class = "text-danger" })
                                     </div>
+
                                     <button class="btn btn-success nextBtn btn-lg pull-center" type="button">Siguiente</button>
                                 </div>
                                 <div class="row setup-content" id="step-2">

@@ -293,7 +293,7 @@
     <Content Include="Views\Home\Registracion.cshtml" />
     <Content Include="Views\Shared\_AnonimoLayout.cshtml" />
     <Content Include="Views\Shared\_UsuarioLayout.cshtml" />
-    <Content Include="Views\Pedidos\detalle.cshtml" />
+    <Content Include="Views\Pedidos\Detalle.cshtml" />
     <Content Include="Views\Pedidos\editar.cshtml" />
     <Content Include="Views\Pedidos\elegir.cshtml" />
     <Content Include="Views\Pedidos\eliminar.cshtml" />
@@ -304,6 +304,7 @@
     <Content Include="Views\Pedidos\Pedidos.cshtml" />
     <Content Include="Views\Pedidos\invitaciones.cshtml" />
     <Content Include="Views\Pedidos\copiar.cshtml" />
+    <Content Include="Views\Pedidos\PedidoNoFinalizado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
