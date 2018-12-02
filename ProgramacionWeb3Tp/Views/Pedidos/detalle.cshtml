@@ -1,7 +1,112 @@
-﻿
-@{
-    ViewBag.Title = "detalle";
-}
-
-<h2>detalle</h2>
-
+﻿@model ProgramacionWeb3Tp.Models.Pedido
+@using ProgramacionWeb3Tp.Models
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="invoice-title">
+                <h2>Detalle del pedido</h2><h3 class="pull-right">Pedido # @Html.DisplayFor(model => model.IdPedido)</h3>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Facturado por:</strong><br>
+                        Ecommerce<br>
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Metodo de entrega:</strong><br>
+                        Envio a domicilio<br>
+                    </address>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Metodo de pago:</strong><br>
+                        Efectivo<br>
+                    </address>
+                    <address>
+                        <strong>Correo de contacto:</strong><br>
+                        @Html.DisplayFor(model => model.Usuario.Email)
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Fecha de inicio de pedido:</strong><br>
+                        @Html.DisplayFor(model => model.FechaCreacion)<br>
+                    </address>
+                    <address>
+                        <strong>Fecha de finalizacion:</strong><br>
+                        @Html.DisplayFor(model => model.FechaModificacion)<br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Detalle del pedido</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Gusto</strong></td>
+                                    <td class="text-center"><strong>Precio</strong></td>
+                                    <td class="text-center"><strong>Cantidad</strong></td>
+                                    <td class="text-center"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (GustoEmpanada item in Model.GustoEmpanada)
+                                {
+                                <tr class="text-center">
+                                    <td>@Html.Label(item.Nombre, htmlAttributes: new { @class = "col-md-3" })</td>
+                                    <td class="text-center col-md-3">@Html.DisplayFor(model => model.PrecioUnidad)</td>
+                                    @{var precioUnidad = Model.PrecioUnidad;}
+                                    @{var cantidad = 0;}
+                                    
+                                    @foreach (InvitacionPedidoGustoEmpanadaUsuario cantidadGusto in Model.InvitacionPedidoGustoEmpanadaUsuario)
+                                    {
+                                        if (cantidadGusto.IdGustoEmpanada == item.IdGustoEmpanada)
+                                        {
+                                            <td class="text-center">@Html.Label(cantidadGusto.Cantidad.ToString(), htmlAttributes: new { @class = "text-center" })</td>
+                                            { cantidad = Int32.Parse(cantidadGusto.Cantidad.ToString()); }
+                                        }
+                                    }
+                                    
+                                    @{var total = precioUnidad * cantidad;}
+                                    <td>@total </td>
+                                </tr>
+                                }
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                    <td class="thick-line text-center">$670.99</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Envio</strong></td>
+                                    <td class="no-line text-center">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total</strong></td>
+                                    <td class="no-line text-center">$685.99</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

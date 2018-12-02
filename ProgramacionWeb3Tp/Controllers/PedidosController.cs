@@ -136,22 +136,7 @@ namespace ProgramacionWeb3Tp.Controllers
             }
         }
 
-        public ActionResult Detalle(Pedido pedido)
-        {
-            List<Pedido> pedidos = new List<Pedido>();
-
-            return View("detalle", pedido);
-        }
-
-        public ActionResult ElegirGustos(int id)
-
-        {
-            Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);         
-
-            return View("elegir", pedido);
-
-        }    
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
         public ActionResult EditarPedido(Pedido pedido)
@@ -181,6 +166,15 @@ namespace ProgramacionWeb3Tp.Controllers
                 ViewBag.gustos = gustos;
                 return View("iniciar", pedido);
             }
+        }
+        
+        public ActionResult ElegirGustos(int id)
+
+        {
+            Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);
+
+            return View("elegir", pedido);
+
         }
 
         [HttpGet]

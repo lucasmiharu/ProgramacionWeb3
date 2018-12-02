@@ -65,22 +65,24 @@
                             <tbody>
                                 @foreach (GustoEmpanada item in Model.GustoEmpanada)
                                 {
-                                    <tr class="text-center">
-                                        <td>@Html.Label(item.Nombre, htmlAttributes: new { @class = "col-md-3" })</td>
-                                        <td class="text-center col-md-3">@Html.DisplayFor(model => model.PrecioUnidad)</td>
-                                        @{var precioUnidad = Model.PrecioUnidad;}
-                                        @{var cantidad = 0;}
-                                        @foreach (InvitacionPedidoGustoEmpanadaUsuario cantidadGusto in Model.InvitacionPedidoGustoEmpanadaUsuario)
+                                <tr class="text-center">
+                                    <td>@Html.Label(item.Nombre, htmlAttributes: new { @class = "col-md-3" })</td>
+                                    <td class="text-center col-md-3">@Html.DisplayFor(model => model.PrecioUnidad)</td>
+                                    @{var precioUnidad = Model.PrecioUnidad;}
+                                    @{var cantidad = 0;}
+                                    
+                                    @foreach (InvitacionPedidoGustoEmpanadaUsuario cantidadGusto in Model.InvitacionPedidoGustoEmpanadaUsuario)
+                                    {
+                                        if (cantidadGusto.IdGustoEmpanada == item.IdGustoEmpanada)
                                         {
-                                            if (cantidadGusto.IdGustoEmpanada == item.IdGustoEmpanada)
-                                            {
-                                                <td class="text-center">@Html.Label(cantidadGusto.Cantidad.ToString(), htmlAttributes: new { @class = "text-center" })</td>
-                                                { cantidad = Int32.Parse(cantidadGusto.Cantidad.ToString()); }
-                                            }
+                                            <td class="text-center">@Html.Label(cantidadGusto.Cantidad.ToString(), htmlAttributes: new { @class = "text-center" })</td>
+                                            { cantidad = Int32.Parse(cantidadGusto.Cantidad.ToString()); }
                                         }
-                                        @{var total = precioUnidad * cantidad;}
-                                        <td>@total </td>
-                                    </tr>
+                                    }
+                                    
+                                    @{var total = precioUnidad * cantidad;}
+                                    <td>@total </td>
+                                </tr>
                                 }
                                 <tr>
                                     <td class="thick-line"></td>

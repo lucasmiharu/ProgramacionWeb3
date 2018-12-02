@@ -168,8 +168,43 @@ namespace ProgramacionWeb3Tp.Servicios
 
             if (pedido != null)
             {
-                ctx.Pedido.Remove(pedido);             
+                //Listas para guardar los id a borrar
+                List<int> invitacionpedido = new List<int>();
+                List<int> gustosEmpanadas = new List<int>();
+                List<int> invitacionPedidoGustoEmpanadaUsuarioIds = new List<int>();
+                //Recorremos las tablas invitacionPedido, GustoEmpanada y InvitacionPedidoGustoEmpanadaUsuario para obtener los id que necesitamos
+                foreach (var invitacion in pedido.InvitacionPedido)
+                {
+                    invitacionpedido.Add(invitacion.IdInvitacionPedido);
+                }
+                foreach (var gusto in pedido.GustoEmpanada)
+                {
+                    gustosEmpanadas.Add(gusto.IdGustoEmpanada);
+                }
+                foreach (var invitacionPedidoGustoEmpanadaUsuario in pedido.InvitacionPedidoGustoEmpanadaUsuario)
+                {
+                    invitacionPedidoGustoEmpanadaUsuarioIds.Add(invitacionPedidoGustoEmpanadaUsuario.IdInvitacionPedidoGustoEmpanadaUsuario);
+                }
+                //Recorremos la lista y eliminamos, una ves terminado se elimina el pedido
+                foreach (var idInvitacion in invitacionpedido)
+                {
+                    var invitacionEliminar = ctx.InvitacionPedido.FirstOrDefault(inv => inv.IdInvitacionPedido == idInvitacion);
+                    ctx.InvitacionPedido.Remove(invitacionEliminar);
+                }
 
+                foreach (var idGustos in gustosEmpanadas)
+                {
+                    var gustoEliminar = ctx.GustoEmpanada.FirstOrDefault(gst => gst.IdGustoEmpanada == idGustos);
+                    pedido.GustoEmpanada.Remove(gustoEliminar);
+                }
+
+                foreach (var idInvitacionPedidoGustoEmpanadaUsuario in invitacionPedidoGustoEmpanadaUsuarioIds)
+                {
+                    var invitacionPedidoGustoEmpanadaUsuarioEliminar = ctx.InvitacionPedidoGustoEmpanadaUsuario.FirstOrDefault(i => i.IdInvitacionPedidoGustoEmpanadaUsuario == idInvitacionPedidoGustoEmpanadaUsuario);
+                    ctx.InvitacionPedidoGustoEmpanadaUsuario.Remove(invitacionPedidoGustoEmpanadaUsuarioEliminar);
+                }
+                //Eliminamos el pedido
+                ctx.Pedido.Remove(pedido);
                 ctx.SaveChanges();
             }
         }
