@@ -1,0 +1,72 @@
+﻿@model ProgramacionWeb3Tp.Models.Usuario
+
+<div class="container" align="center">
+    <div id="login" align="center">
+        <h3 class="text-center text-white pt-5">Inicia sesion para realizar tus pedidos!</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-12">
+                    <div id="login-box" class="col-md-12">
+
+                        <form id="login-form" class="form" action="Loguear" method="post">
+                            @Html.AntiForgeryToken()
+                            <h3 class="text-center text-info">Iniciar sesión</h3>
+                            @if (string.IsNullOrEmpty(ViewBag.Mensaje))
+                            {   <div class="form-group">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "text-info" })
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email", autocomplete = "off" } })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "text-info" })
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", autocomplete = "off" } })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="remember-me" class="text-info"><span>Recordar usuario</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                        <input type="submit" name="submit" class="btn btn-info btn-md" value="Ingresar">
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div id="register-link" class="text-center">
+                                        @Html.ActionLink("¡Registrarme!", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-primary btn-md" })
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                            {//si existe un mensaje
+                                <div class="col-md-12">
+
+
+                                    <h5>Sera redireccionado en unos segundos..</h5>
+                                    @if (string.Equals(ViewBag.Mensaje, "E-mail y/o contraseña incorrectos, por favor intentá nuevamente"))
+                                    {
+                                        <div class="alert alert-danger text-center">
+                                            <h5>@ViewBag.Mensaje</h5>
+                                            <meta http-equiv="refresh" content="2; url=/Home/login">
+                                        </div>
+                                    }
+                                    @if (!string.Equals(ViewBag.Mensaje, "E-mail y/o contraseña incorrectos, por favor intentá nuevamente"))
+                                    {
+                                        <div class="alert alert-success text-center">
+                                            <h5>@ViewBag.Mensaje</h5>
+                                            <meta http-equiv="refresh" content="3; url=/">
+                                        </div>
+                                    }
+
+
+
+
+                                </div>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

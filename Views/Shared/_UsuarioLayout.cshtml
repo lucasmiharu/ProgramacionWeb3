@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/build.min.js")
+    @Scripts.Render("~/Scripts/fastselect.standalone.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap.js")
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    <link href="@Url.Content("~/Content/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/build.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/fastselect.min.css")" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+</head>
+<body>
+
+    <div class="class=" d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Empanadas de la Abuela", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Productos", "Productos", "Home")</li>
+                        <li>@Html.ActionLink("Quienes somos", "Nosotros", "Home")</li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hace tu pedido!  <span class="caret"></span></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                @Html.ActionLink("Pedido desde Cero", "Iniciar", "Pedidos", new { area = "" }, new { @class = "btn btn-success btn-block" })
+                                @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos", new { area = "", Copia = "S" }, new { @class = "btn btn-info btn-block" })
+                            </div>
+                        </li>
+                        <li>@Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos")</li>
+                        <li>@Html.ActionLink("Mis invitaciones", "Invitaciones", "Pedidos")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><div class="btn btn-info navbar-btn"><span class="glyphicon glyphicon-user"></span>&nbsp;@Session["Usuario"]</div></li>
+                        <li>@Html.ActionLink("Salir", "Salir", "Home")</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p align="center">&copy; @DateTime.Now.Year - Empanadas de la Abuela</p>
+        </footer>
+    </div>
+    <script>
+
+        $('.multipleSelect').fastselect();
+
+    </script>
+    <script>
+        $('#modalCierre').on('show.bs.modal', function (e) {
+            var pedidoId = $(e.relatedTarget).data('pedido-id');
+            $(e.currentTarget).find('input[name="pedidoId"]').val(pedidoId);
+        });
+    </script>
+    <script>
+        $('#modalEliminar').on('show.bs.modal', function (e) {
+            var pedidoId = $(e.relatedTarget).data('pedido-id');
+            $(e.currentTarget).find('input[name="pedidoId"]').val(pedidoId);
+        });
+    </script>
+    @Scripts.Render("~/bundles/funcionesPropias")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

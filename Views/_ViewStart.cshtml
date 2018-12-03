@@ -1,0 +1,16 @@
+﻿@using ProgramacionWeb3Tp.Models
+
+
+@{
+
+    if (ClsSesion.GetUsuarioLogueado() != null)
+    {
+        Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AnonimoLayout.cshtml";
+    }
+
+
+}
