@@ -10,6 +10,7 @@ namespace ProgramacionWeb3Tp.Controllers
 {
     public class PedidosController : Controller
     {
+        static Usuario usuarioLogueado = new Usuario();
         private readonly PedidoServicio _pedidoServicio = new PedidoServicio();
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
@@ -136,11 +137,37 @@ namespace ProgramacionWeb3Tp.Controllers
             }
         }
 
-        
+        public ActionResult Detalle(Pedido pedido)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+
+            return View("detalle", pedido);
+        }
+
+      
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
         public ActionResult EditarPedido(Pedido pedido)
         {         
+
+            Usuario us1 = new Usuario();
+            us1.IdUsuario = 10;
+            us1.Email = "ramitasilva@gmail.com";
+            us1.Password = "rama";
+            
+            Usuario us2 = new Usuario();
+            us2.IdUsuario = 21;
+            us2.Email = "lucasmiharu@gmail.com";
+            us2.Password = "lucas";
+
+
+
+            List<Usuario> usuariosAEnviarInvitacion = new List<Usuario>();
+            usuariosAEnviarInvitacion.Add(us1);
+            usuariosAEnviarInvitacion.Add(us2);
+
+            _pedidoServicio.EnviarMail(usuariosAEnviarInvitacion, pedido);
+            
 
             //si eligio invitados y gustos sigo
             if (ModelState.IsValid && Request["SelecInvitados"] != null && Request["SelecGustos"] != null)
@@ -167,11 +194,16 @@ namespace ProgramacionWeb3Tp.Controllers
                 return View("iniciar", pedido);
             }
         }
-        
-        public ActionResult ElegirGustos(int id)
 
+        public ActionResult ElegirGustos(int id)
         {
+            int usuarioLoguedo;
             Pedido pedido = _pedidoServicio.ObtenerPedidoPorId(id);
+
+            usuarioLoguedo = ClsSesion.GetUsuarioLogueado().IdUsuario;
+
+            ViewBag.IdUsuario = usuarioLoguedo;
+            ViewBag.TokenInvitacion = pedido.InvitacionPedido.Where(i => i.IdPedido == pedido.IdPedido && i.IdUsuario == usuarioLoguedo).FirstOrDefault().Token.ToString();
 
             return View("elegir", pedido);
 
@@ -197,6 +229,30 @@ namespace ProgramacionWeb3Tp.Controllers
         public ActionResult PedidoNoFinalizado()
         {
             return View();
+        }
+
+        public ActionResult ElegirToken(System.Guid id)
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Login", "Home", new { redirigir = "/Pedidos/ElegirToken/" + id });
+            }
+            usuarioLogueado = _pedidoServicio.BuscarUsuarioById(Convert.ToInt32(Session["usuario"]));
+            //Guid token = Guid.Parse(tokn);
+            Pedido pedido = _pedidoServicio.ObtenerPedidoByToken(id);
+            if (!(usuarioLogueado.IdUsuario == pedido.InvitacionPedido.Where(i => i.Token == id).Select(u => u.IdUsuario).FirstOrDefault()))
+            {
+                TempData["mensaje"] = "Acceso invalido";
+                return RedirectToAction("Error", "Home");
+            }
+            if (!_pedidoServicio.InvitacionPedidoUsuarioIsTrue(pedido.IdPedido, usuarioLogueado))
+            {
+                TempData["mensaje"] = "Acceso invalido";
+                return RedirectToAction("Error", "Home");
+            }
+            ViewBag.IdUsuario = usuarioLogueado.IdUsuario;
+            ViewBag.TokenInvitacion = pedido.InvitacionPedido.Where(i => i.IdPedido == pedido.IdPedido && i.IdUsuario == usuarioLogueado.IdUsuario).FirstOrDefault().Token.ToString();
+            return View("Elegir", pedido);
         }
     }
 }

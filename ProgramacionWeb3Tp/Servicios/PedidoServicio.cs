@@ -5,6 +5,8 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Web.Mvc;
+using ProgramacionWeb3Tp.Helper;
 
 namespace ProgramacionWeb3Tp.Servicios
 {
@@ -12,6 +14,7 @@ namespace ProgramacionWeb3Tp.Servicios
     {
         private static Pedidos ctx = new Pedidos();
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
+        EmailService es = new EmailService();
 
         public Pedido ObtenerPedidoPorId(int id)
         {
@@ -102,8 +105,6 @@ namespace ProgramacionWeb3Tp.Servicios
         }
 
 
-
-
         public List<Pedido> ObtenerPedidosPorUsuario(int usuarioId)
         {
             var pedidos = (from l in ctx.Pedido
@@ -168,43 +169,8 @@ namespace ProgramacionWeb3Tp.Servicios
 
             if (pedido != null)
             {
-                //Listas para guardar los id a borrar
-                List<int> invitacionpedido = new List<int>();
-                List<int> gustosEmpanadas = new List<int>();
-                List<int> invitacionPedidoGustoEmpanadaUsuarioIds = new List<int>();
-                //Recorremos las tablas invitacionPedido, GustoEmpanada y InvitacionPedidoGustoEmpanadaUsuario para obtener los id que necesitamos
-                foreach (var invitacion in pedido.InvitacionPedido)
-                {
-                    invitacionpedido.Add(invitacion.IdInvitacionPedido);
-                }
-                foreach (var gusto in pedido.GustoEmpanada)
-                {
-                    gustosEmpanadas.Add(gusto.IdGustoEmpanada);
-                }
-                foreach (var invitacionPedidoGustoEmpanadaUsuario in pedido.InvitacionPedidoGustoEmpanadaUsuario)
-                {
-                    invitacionPedidoGustoEmpanadaUsuarioIds.Add(invitacionPedidoGustoEmpanadaUsuario.IdInvitacionPedidoGustoEmpanadaUsuario);
-                }
-                //Recorremos la lista y eliminamos, una ves terminado se elimina el pedido
-                foreach (var idInvitacion in invitacionpedido)
-                {
-                    var invitacionEliminar = ctx.InvitacionPedido.FirstOrDefault(inv => inv.IdInvitacionPedido == idInvitacion);
-                    ctx.InvitacionPedido.Remove(invitacionEliminar);
-                }
+                ctx.Pedido.Remove(pedido);             
 
-                foreach (var idGustos in gustosEmpanadas)
-                {
-                    var gustoEliminar = ctx.GustoEmpanada.FirstOrDefault(gst => gst.IdGustoEmpanada == idGustos);
-                    pedido.GustoEmpanada.Remove(gustoEliminar);
-                }
-
-                foreach (var idInvitacionPedidoGustoEmpanadaUsuario in invitacionPedidoGustoEmpanadaUsuarioIds)
-                {
-                    var invitacionPedidoGustoEmpanadaUsuarioEliminar = ctx.InvitacionPedidoGustoEmpanadaUsuario.FirstOrDefault(i => i.IdInvitacionPedidoGustoEmpanadaUsuario == idInvitacionPedidoGustoEmpanadaUsuario);
-                    ctx.InvitacionPedidoGustoEmpanadaUsuario.Remove(invitacionPedidoGustoEmpanadaUsuarioEliminar);
-                }
-                //Eliminamos el pedido
-                ctx.Pedido.Remove(pedido);
                 ctx.SaveChanges();
             }
         }
@@ -229,5 +195,183 @@ namespace ProgramacionWeb3Tp.Servicios
             return detallePedido;
 
         }
+        
+        public void EnviarMail(List<Usuario> usuariosAEnviarInvitacion, Pedido pedido)
+        {
+            foreach (Usuario invitado in usuariosAEnviarInvitacion)
+            {
+                Usuario usuarioEncontrado = ctx.Usuario.SingleOrDefault(x => x.IdUsuario == invitado.IdUsuario);
+                Pedido pedidoEncontrado = ctx.Pedido.SingleOrDefault(p => p.IdPedido == pedido.IdPedido);
+
+                InvitacionPedido invitacionPedido = new InvitacionPedido
+                {
+                    Pedido = pedidoEncontrado,
+                    Usuario = usuarioEncontrado,
+                    Token = new Guid(new Md5Hash().GetMD5((usuarioEncontrado.Email + pedidoEncontrado.FechaCreacion))),
+                    Completado = false,
+                };
+                ctx.InvitacionPedido.Add(invitacionPedido);
+                ctx.SaveChanges();
+                es.EnviarEmailInvitados(invitacionPedido);
+            }
+        }
+
+                public void EnviarInvitacionesDesdeUnaListaDeUsuarios(List<Usuario> usuarios, Pedido pedido)
+        {
+            foreach (Usuario invitado in usuarios)
+            {
+                Usuario usuarioEncontrado = ctx.Usuario.SingleOrDefault(x => x.IdUsuario == invitado.IdUsuario);
+                Pedido pedidoEncontrado = ctx.Pedido.SingleOrDefault(p => p.IdPedido == pedido.IdPedido);
+                InvitacionPedido invitacionPedido = new InvitacionPedido
+                {
+                    Pedido = pedidoEncontrado,
+                    Usuario = usuarioEncontrado,
+                    Token = new Guid(new Md5Hash().GetMD5((usuarioEncontrado.Email + pedidoEncontrado.FechaCreacion))),
+                    Completado = false,
+                };
+                ctx.InvitacionPedido.Add(invitacionPedido);
+                ctx.SaveChanges();
+                es.EnviarEmailInvitados(invitacionPedido);
+            }
+        }        
+
+        public Usuario BuscarUsuarioById(int idUsuario)
+        {
+            Usuario usuarioEncontrado = ctx.Usuario.SingleOrDefault(x => x.IdUsuario == idUsuario);
+            return usuarioEncontrado;
+        }
+
+        public Pedido ObtenerPedidoByToken(Guid token)
+        {
+            Pedido pedido = ctx.InvitacionPedido.Where(i => i.Token == token).Select(p => p.Pedido).FirstOrDefault();
+            return pedido;
+        }
+
+        public Boolean InvitacionPedidoUsuarioIsTrue(int idPedido, Usuario usuario)
+        {
+            var query = (from ip in ctx.InvitacionPedido
+                         where ip.IdUsuario == usuario.IdUsuario && ip.IdPedido == idPedido
+                         select ip).ToList();
+
+            if (query.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public int ObtenerEnviarInvitacion(Pedido pedido)
+        {
+            int envioInvitacion = pedido.IdPedido;
+
+            return envioInvitacion;
+        }
+
+        public List<Usuario> DeterminarEnviosDeInvitacionSegunEstado(Pedido pedido)
+        {
+            int IdEnviarInvitacion = ObtenerEnviarInvitacion(pedido);
+
+            List<Usuario> usuariosAInvitar = new List<Usuario>();
+
+            switch (IdEnviarInvitacion)
+            {
+                case 1:
+                    //A nadie
+                    break;
+                case 2:
+                    //Re enviar a todos
+                    usuariosAInvitar = ObtenerTodosLosUsuariosInvitados(pedido);
+                    break;
+                case 3:
+                    //Enviar solo a los nuevos
+                    usuariosAInvitar = ObtenerLosUsuariosQueAntesNoEstabanInvitados(pedido);
+                    break;
+                case 4:
+                    //Re enviar a los que no eligieron gustos
+                    usuariosAInvitar = ObtenerLosUsuariosInvitadosQueNoEligieronGustos(pedido);
+                    break;
+            }
+
+            return usuariosAInvitar;
+        }
+
+        public List<Usuario> ObtenerTodosLosUsuariosInvitados(Pedido pedido)
+        {
+            var query =
+                (from ip in ctx.InvitacionPedido
+                 join p in ctx.Pedido on ip.IdPedido equals p.IdPedido
+                 join u in ctx.Usuario on ip.IdUsuario equals u.IdUsuario
+                 where ip.IdPedido == pedido.IdPedido
+                 select
+                    u).Distinct().ToList();
+            return query;
+        }
+
+        public List<Usuario> ObtenerLosUsuariosQueAntesNoEstabanInvitados(Pedido pedido)
+        {
+            List<Usuario> usuariosAInvitar = new List<Usuario>();
+
+            List<Usuario> usuariosListados = new List<Usuario>();
+
+            Pedido pedidoAEditar = ObtenerPedidoPorId(pedido.IdPedido);
+
+            //int[] invitados = Array.ConvertAll(pedido.GetValues("invitados"), int.Parse);
+
+            //foreach (var usuario in invitados)
+            //{
+            //    Usuario usuarioBuscado = BuscarUsuarioById(usuario);
+            //    usuariosListados.Add(usuarioBuscado);
+            //}
+
+            foreach (Usuario usuario in usuariosListados)
+            {
+                foreach (InvitacionPedido invitacionPedido in pedidoAEditar.InvitacionPedido)
+                {
+                    if (usuario.InvitacionPedido.Contains(invitacionPedido))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        usuariosAInvitar.Add(usuario);
+                        break;
+                    }
+                }
+            }
+
+            return usuariosAInvitar;
+        }
+
+        private List<Usuario> ObtenerLosUsuariosInvitadosQueNoEligieronGustos(Pedido pedido)
+        {
+            List<Usuario> usuariosAInvitar = new List<Usuario>();
+
+            List<Usuario> usuariosListados = new List<Usuario>();
+
+            Pedido pedidoAEditar = ObtenerPedidoPorId(pedido.IdPedido);
+
+            //int[] invitados = Array.ConvertAll(pedido.InvitacionPedido.GetValues("invitados"), int.Parse);
+
+            //foreach (var usuario in invitados)
+            //{
+            //    Usuario usuarioBuscado = BuscarUsuarioById(usuario);
+            //    usuariosListados.Add(usuarioBuscado);
+            //}
+
+            foreach (Usuario usuario in usuariosListados)
+            {
+                if (usuario.InvitacionPedido.Where(u => u.IdPedido == pedidoAEditar.IdPedido).Select(i => i.Completado).FirstOrDefault() == true)
+                {
+
+                }
+                else
+                {
+                    usuariosAInvitar.Add(usuario);
+                }
+            }
+
+            return usuariosAInvitar;
+        }
     }
 }
+

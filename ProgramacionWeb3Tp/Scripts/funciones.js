@@ -18,6 +18,8 @@
 
 $(document).ready(function () {
 
+    
+
     var navListItems = $('div.setup-panel div a'),
         allWells = $('.setup-content'),
         allNextBtn = $('.nextBtn');
@@ -58,12 +60,56 @@ $(document).ready(function () {
     });
 
     $('div.setup-panel div a.btn-primary').trigger('click');
+
+
+
+    $('#btnConfirmarGustos').on('click', function () {
+        var pedido = new Object();
+          
+        pedido.IdPedido = $('#idPedido').val();
+        pedido.IdUsuario = $('#IdUsuario').val();
+     //   pedido.Token = $('#Token').val();       
+       var GustosEmpanadasCantidad = [];
+       
+
+        $("input[name=Cantidad]").each(function () {      
+            GustosEmpanadasCantidad.push({ "IdGustoEmpanada": this.id, "Cantidad": $('#' + this.id).val() });    
+        })
+        
+        pedido.GustosEmpanadasCantidad = GustosEmpanadasCantidad;    
+
+              
+        ElegirGustos(JSON.stringify(pedido));
+    })
+
 });
+
+
+//seleccionar gustos
+function ElegirGustos(pedido) {
+    alert(pedido);
+    var url = 'http://localhost:59117/api/pedido/';
+    $.ajax({
+        url: url,
+       // dataType: "jsonp",
+        type: 'POST',
+       data: pedido,
+        contentType: "application/json;chartset=utf-8",
+        success: function (result) {
+            var mensajeResult = JSON.parse(result);
+            $('#headerResultado').html(mensajeResult.Resultado);
+            $('#mensajeGustos').html(mensajeResult.Mensaje);
+            $("#confirmacionGustosModal").modal();
+        }        
+    });
+}
+
+
+
 
 $(document).ready(function () {
     $('#datatable').dataTable();
 
     $("[data-toggle=tooltip]").tooltip();
-
 });
 
