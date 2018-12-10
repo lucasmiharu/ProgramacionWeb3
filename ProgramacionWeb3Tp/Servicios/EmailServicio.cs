@@ -58,7 +58,7 @@ namespace ProgramacionWeb3Tp.Servicios
         public void EnviarEmailInvitados(InvitacionPedido invitacion)
         {
            
-            MailMessage email = new MailMessage("ramitasilva@gmail.com", "ramitasilva@gmail.com");
+            MailMessage email = new MailMessage("lucasmiharu@gmail.com", "lucasmiharu@gmail.com");
             //MailMessage email = new MailMessage("ramitasilva@gmail.com", invitacion.Usuario.Email);
 
             email.Subject = "Te invitó " + invitacion.Pedido.Usuario.Email + " para pedir empanadas";            

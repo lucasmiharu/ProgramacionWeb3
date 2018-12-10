@@ -151,12 +151,12 @@ namespace ProgramacionWeb3Tp.Controllers
         {         
 
             Usuario us1 = new Usuario();
-            us1.IdUsuario = 10;
+            us1.IdUsuario = 8;
             us1.Email = "ramitasilva@gmail.com";
             us1.Password = "rama";
             
             Usuario us2 = new Usuario();
-            us2.IdUsuario = 21;
+            us2.IdUsuario = 9;
             us2.Email = "lucasmiharu@gmail.com";
             us2.Password = "lucas";
 

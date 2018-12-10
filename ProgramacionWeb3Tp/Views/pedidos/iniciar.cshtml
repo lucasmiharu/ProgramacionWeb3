@@ -1,125 +1,211 @@
 @model ProgramacionWeb3Tp.Models.Pedido
 @using ProgramacionWeb3Tp.Models
 
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Empanadas</b> </span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" data-toggle="control-sidebar" class="info"><i class="fa fa-arrow-left"></i> Volver al sitio</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="~/Content/dist/img/avatar5.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="info">
+                    <h6>@Session["Usuario"]</h6>
 
-@using (Html.BeginForm("RegistrarPedido", "Pedidos", "Post"))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="container" align="center">
-        <div id="login" align="center">
-            <h3 class="text-center text-white pt-5">Realiza tu pedido en pocos pasos, es muy sencillo!</h3>
-            <br />
-            <div class="stepwizard">
-                <div class="stepwizard-row setup-panel">
-                    <div class="stepwizard-step">
-                        <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                        <p>Datos</p>
-                    </div>
-                    <div class="stepwizard-step">
-                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                        <p>Invitados</p>
-                    </div>
-                    <div class="stepwizard-step">
-                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>Gustos</p>
-                    </div>
                 </div>
             </div>
-  
-            <div class="container">
-                <div id="login-row" class="row justify-content-center align-items-center">
-                    <div id="login-column" class="col-md-12">
-                        <div id="login-box" class="col-md-12">
-                            <div class="form" role="form">
-                                <div class="row setup-content" id="step-1">
-                                    <h3>Datos del pedido</h3>
-                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "text-info" })
-                                        @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
-                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "text-info" })
-                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion del pedido", autocomplete = "off" } })
-                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "text-info" })
-                                        @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
-                                        @Html.ValidationMessageFor(model => model.PrecioUnidad, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "text-info" })
-                                        @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
-                                        @Html.ValidationMessageFor(model => model.PrecioDocena, "", new { @class = "text-danger" })
-                                    </div>
 
-                                    <button class="btn btn-success nextBtn btn-lg pull-center" type="button">Siguiente</button>
-                                </div>
-                                <div class="row setup-content" id="step-2">
-                                    <div id="ListInvitados" class="form-group">
-                                        <h3>Seleccion de Invitados</h3> <BR>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Menu de opciones</li>
+                <li class="">
+                    @Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos", new { @class = "" })
 
-                                        @if ((ViewBag.invitados != null))
+                </li>
+                <li class="active">
+                    @Html.ActionLink("Iniciar pedido", "Iniciar", "Pedidos", new { area = "" }, new { @class = "" })
+                </li>
+                <li class="">
+                    @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos", new { area = "", Copia = "S" })
+                </li>
+                <li class="">
+                    @Html.ActionLink("Mis invitaciones", "Invitaciones", new { @class = "" })
+                </li>
 
-                                        {
-                                            @*foreach (Usuario item in ViewBag.invitados)
-                                            {
-                                                <input type="checkbox" name="SelecInvitados" id="@item.IdUsuario" value="@item.IdUsuario" />@item.Email
-                                            }*@
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Nuevo pedido 
+                <small>desde cero</small>
+            </h1>
 
-                                            <select class="multipleSelect" name="SelecInvitados" multiple>
-                                                @foreach (Usuario item in ViewBag.invitados)
-                                                {
-                                                <option   id="@item.IdUsuario" value="@item.IdUsuario">@item.Email</option>
-                                                }
-                                            </select>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                   
+                            @using (Html.BeginForm("RegistrarPedido", "Pedidos", "Post"))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="container" align="center">
+                                    <div id="login" align="center">
+                                        <br />
+                                        <div class="alert alert-info alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <h4>Inicia un pedido desde cero</h4>
+                                            Elegi los gustos y tus amigos completaran las cantidades.
+                                        </div>
+                                        <div class="stepwizard">
+                                            <div class="stepwizard-row setup-panel">
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                                    <p>Datos</p>
+                                                </div>
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                                                    <p>Invitados</p>
+                                                </div>
+                                                <div class="stepwizard-step">
+                                                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                                                    <p>Gustos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="box box-primary">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">Datos del pedido</h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <!-- form start -->
+                                            <div class="box-body">
+                                                <div class="row setup-content" id="step-1">
+                                                    
+                                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "" })
+                                                            @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
+                                                            @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "" })
+                                                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion del pedido", autocomplete = "off" } })
+                                                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "" })
+                                                            @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
+                                                            @Html.ValidationMessageFor(model => model.PrecioUnidad, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group">
+                                                            @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "" })
+                                                            @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
+                                                            @Html.ValidationMessageFor(model => model.PrecioDocena, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                        <div class="form-group col-lg-6 col-lg-offset-3">
+                                                            <button class="btn btn-success nextBtn btn-lg btn-block pull-center" type="button">Siguiente</button>
+                                                        </div>
+                                                   
+                                                    
+                                                </div>
+                                                <div class="row setup-content" id="step-2">
+                                                    <div id="ListInvitados" class="form-group col-lg-6 col-lg-offset-3">
+                                                        @if ((ViewBag.invitados != null))
+
+                                                        {
+                                                            <select class="form-control col-6 select2 select2-hidden-accessible " multiple="" name="SelecInvitados" data-placeholder="Seleccione invitados" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                                @foreach (Usuario item in ViewBag.invitados)
+                                                                {
+                                                                    <option id="@item.IdUsuario" value="@item.IdUsuario">@item.Email</option>
+                                                                }
+                                                            </select>
+                                                        }
+
+
+                                                    </div>
+                                                    <div  class="form-group col-lg-6 col-lg-offset-3">
+                                                        <button class="btn btn-success nextBtn btn-lg btn-block pull-center" type="button">Siguiente</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="row setup-content" id="step-3">
+                                                    <div id="ListInvitados" class="form-group col-lg-6 col-lg-offset-3">
+
+                                                        @if ((ViewBag.gustos != null))
+
+                                                        {
+
+                                                            <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Seleccione gustos" name="SelecGustos" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                                @foreach (GustoEmpanada item in ViewBag.gustos)
+                                                                {
+
+                                                                    <option id="@item.IdGustoEmpanada" value="@item.IdGustoEmpanada">@item.Nombre</option>
+                                                                }
+                                                            </select>
+                                                        }
+                                                    </div>
+                                                    <div class="form-group col-lg-6 col-lg-offset-3">
+                                                        <input type="submit" name="submit" class="btn btn-info" value="Iniciar pedido" onClick="return true;" />
+                                                    </div>
+
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                 </div>
+
+
                                         }
-                                    </div>
-                                    <button class="btn btn-success nextBtn btn-lg pull-center" type="button">Siguiente</button>
-                                </div>
-                                <div class="row setup-content" id="step-3">
-                                    <div id="ListInvitados" class="form-group">
-                                        <h3>Seleccion de Gustos disponibles</h3> <BR>
-
-                                        @if ((ViewBag.gustos != null))
-
-                                        {
-                                            @*foreach (GustoEmpanada item in ViewBag.gustos)
-                                            {
-                                                <input type="checkbox" name="SelecGustos" id="@item.IdGustoEmpanada" value="@item.IdGustoEmpanada" />@item.Nombre
-                                            }*@
 
 
-                                            <select class="multipleSelect"name="SelecGustos"  multiple>
-                                                @foreach (GustoEmpanada item in ViewBag.gustos)
-                                                {
-
-                                                <option  id="@item.IdGustoEmpanada" value="@item.IdGustoEmpanada">@item.Nombre</option>
-                                                }
-                                            </select>
-                                        }
-                                    </div>
-                                    <input type="submit" name="submit" class="btn btn-info" value="Iniciar pedido" onClick="return true;" />
-                                </div>
-
-
-
-
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
+                                    
+                    <!-- /.box -->
                 </div>
+                <!-- /.col -->
             </div>
-        </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
-
-
-}
-
+    <!-- /.content-wrapper -->
+</div>
