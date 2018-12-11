@@ -5,10 +5,17 @@
 img {
     width: 100%
 }
-.btn-slider{
-    margin-top:250px;
-    margin-left:850px;
-    position:fixed;
+.form {
+    margin-top: -50px;
+}
+
+.img-gustos {
+height:250px;
+}
+.btn-slider {
+    margin-top: 250px;
+    margin-left: 850px;
+    position: fixed;
 }
 
 .titulo-slider {
@@ -38,7 +45,7 @@ img {
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 
