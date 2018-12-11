@@ -7,11 +7,11 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/agency.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/agency.min.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,19 +31,24 @@
                 <li>@Html.ActionLink("Hace tu pedido ahora!", "Login", "Home", new { area = "" }, new { @class = "btn btn-success navbar-btn" })</li>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </div>*@
+    @*<div class="container body-content">*@
         @RenderBody()
         <hr />
         <footer>
             <p align="center">&copy; @DateTime.Now.Year - Empanadas de la Abuela</p>
         </footer>
-    </div>
+    @*</div>*@
     <script>
         $('.multipleSelect').fastselect();
     </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/agency.js")
+    @Scripts.Render("~/Scripts/agency.min.js")
+    @Scripts.Render("~/Scripts/contact_me.js")
+    @Scripts.Render("~/Scripts/jqBootstrapValidation.js")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>
