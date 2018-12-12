@@ -61,7 +61,7 @@ namespace ProgramacionWeb3Tp.Servicios
             MailMessage email = new MailMessage("lucasmiharu@gmail.com", "lucasmiharu@gmail.com");
             //MailMessage email = new MailMessage("ramitasilva@gmail.com", invitacion.Usuario.Email);
 
-            email.Subject = "Te invitó " + invitacion.Pedido.Usuario.Email + " para pedir empanadas";            
+            email.Subject = "Te invitó /* + invitacion.Pedido.Usuario.Email + */ para pedir empanadas";            
             email.Body = "Has sido invitado para realizar un pedido de empanadas http://localhost:50846/Pedidos/ElegirToken/" + invitacion.Token;
 
             //defino valores del SMTP

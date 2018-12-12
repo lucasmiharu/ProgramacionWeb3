@@ -2,7 +2,7 @@
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/Home/Index/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Empanadas</b> </span>
@@ -22,7 +22,7 @@
                     <ul class="nav navbar-nav">
 
                         <li>
-                            <a href="/" data-toggle="control-sidebar" class="info"><i class="fa fa-arrow-left"></i> Volver al sitio </a>
+                            <a href="/Home/index/"  class="info"><i class="fa fa-arrow-left"></i> Volver al sitio </a>
                         </li>
 
                     </ul>
@@ -153,12 +153,9 @@
                                             <h4 class="modal-title custom_align" id="Heading">Eliminar pedido</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> “¿Está seguro que desea eliminar el pedido?</div>
-
-                                            <input type="text" name="nombreNegocio" value="nombreNegocio" />
-                                            <p id="nombreNegocio"></p>
-                                            <p name="nombreNegocio"></p>
-
+                                            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> “¿Está seguro que desea eliminar el pedido del negocio <strong id='nombreNegocio'></strong>?<br />Actualmente posee @ViewBag.InvitacionesConfirmadas invitaciones confirmadas </div>
+                                            
+                                            
                                         </div>
                                         <div class="modal-footer ">
 

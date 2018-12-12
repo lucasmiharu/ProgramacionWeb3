@@ -44,6 +44,15 @@ namespace ProgramacionWeb3Tp.Servicios
             
         }
 
+        internal int ObtenerInvitacionesConfirmadas(int idUsuario)
+        {
+            int Confirmadas = (from l in ctx.InvitacionPedido
+                               where l.IdPedido == 2
+                               select l).Count();
+
+            
+            return Confirmadas;
+        }
 
         public void SetInvitados(Pedido pedido, String[] Invitados)
         {
@@ -148,6 +157,19 @@ namespace ProgramacionWeb3Tp.Servicios
             return gusto;
         }
 
+        internal List<Usuario> ObtenerUsuariosInvitadosDePedido(Pedido pedido)
+        {
+            var query =
+                (from ip in ctx.InvitacionPedido
+                 join p in ctx.Pedido on ip.IdPedido equals p.IdPedido
+                 join u in ctx.Usuario on ip.IdUsuario equals u.IdUsuario
+                 where ip.IdPedido == pedido.IdPedido
+                 select
+                    u).Distinct().ToList();
+            return query;
+        }
+       
+
         public Pedido EditarPedidoExistente(Pedido pedido)
         {
             Pedido pedidoActualizado = ObtenerPedidoPorId(pedido.IdPedido);
@@ -169,9 +191,48 @@ namespace ProgramacionWeb3Tp.Servicios
 
             if (pedido != null)
             {
-                ctx.Pedido.Remove(pedido);             
+                
+                List<int> gustoEmpanadas = new List<int>();
+                List<int> invitacionPedido = new List<int>();
+                List<int> invitacionPedidoGustoEmpanadaUsuarioIds = new List<int>();
 
+                //Recorremos la lista de los id
+                foreach (var gusto in pedido.GustoEmpanada)
+                {
+                    gustoEmpanadas.Add(gusto.IdGustoEmpanada);
+                }
+
+                foreach (var invitacion in pedido.InvitacionPedido)
+                {
+                    invitacionPedido.Add(invitacion.IdInvitacionPedido);
+                }
+                foreach (var invitacionPedidoGustoEmpanadaUsuario in pedido.InvitacionPedidoGustoEmpanadaUsuario)
+                {
+                    invitacionPedidoGustoEmpanadaUsuarioIds.Add(invitacionPedidoGustoEmpanadaUsuario.IdInvitacionPedidoGustoEmpanadaUsuario);
+                }
+
+                //Eliminamos los id recorridos 
+                foreach (var idGustos in gustoEmpanadas)
+                {
+                    var gustoEliminar = ctx.GustoEmpanada.FirstOrDefault(g => g.IdGustoEmpanada == idGustos);
+                    pedido.GustoEmpanada.Remove(gustoEliminar);
+                }
+
+                foreach (var idInvitacion in invitacionPedido)
+                {
+                    var invitacionEliminar = ctx.InvitacionPedido.FirstOrDefault(i => i.IdInvitacionPedido == idInvitacion);
+                    ctx.InvitacionPedido.Remove(invitacionEliminar);
+                }
+
+                foreach (var idInvitacionPedidoGustoEmpanadaUsuario in invitacionPedidoGustoEmpanadaUsuarioIds)
+                {
+                    var invitacionPedidoGustoEmpanadaUsuarioEliminar = ctx.InvitacionPedidoGustoEmpanadaUsuario.FirstOrDefault(i => i.IdInvitacionPedidoGustoEmpanadaUsuario == idInvitacionPedidoGustoEmpanadaUsuario);
+                    ctx.InvitacionPedidoGustoEmpanadaUsuario.Remove(invitacionPedidoGustoEmpanadaUsuarioEliminar);
+                }
+                //salvamos
+                ctx.Pedido.Remove(pedido);
                 ctx.SaveChanges();
+
             }
         }
 

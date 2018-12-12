@@ -1,85 +1,182 @@
 ﻿@model ProgramacionWeb3Tp.Models.Pedido
 @using ProgramacionWeb3Tp.Models
 
-
-
-<div class="container" align="center">
-    <div id="login" align="center">
-        <h3 class="text-center text-white pt-5">Completa la cantidad de gustos!</h3>
-        <br />
-        <div class="stepwizard">
-            <div class="stepwizard-row setup-panel">
-                <div class="stepwizard-step">
-                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                    <p>Datos</p>
-                </div>
-                <div class="stepwizard-step">
-                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                    <p>Gustos</p>
-                </div>
-
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Empanadas</b> </span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" data-toggle="control-sidebar" class="info"><i class="fa fa-arrow-left"></i> Volver al sitio</a>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="~/Content/dist/img/avatar5.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="info">
+                    <h6>@Session["Usuario"]</h6>
 
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-12">
-                    <div id="login-box" class="col-md-12">
-                        <div class="form" role="form">
+                </div>
+            </div>
 
-                            <div class="row setup-content" id="step-1">
-                                <h3>Datos del pedido</h3>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Menu de opciones</li>
+                <li class="">
+                    @Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos", new { @class = "" })
 
-                                <input type="hidden" id="idPedido" name="idPedido" value="@Model.IdPedido" />
-                                <input type="hidden" id="Token" name="token" value="@ViewBag.TokenInvitacion" />
-                                <input type="hidden" id="IdUsuario" name="IdUsuario" value="@ViewBag.IdUsuario" />
+                </li>
+                <li class="active">
+                    @Html.ActionLink("Iniciar pedido", "Iniciar", "Pedidos", new { area = "" }, new { @class = "" })
+                </li>
+                <li class="">
+                    @Html.ActionLink("Copiar Pedido", "Pedidos", new { area = "", Copia = "S" })
+                </li>
+                <li class="">
+                    @Html.ActionLink("Mis invitaciones", "Invitaciones", new { @class = "" })
+                </li>
+                <li>
+                    @Html.ActionLink("Cerrar sesion", "Salir", "Home")
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Elegir gustos
+               
+            </h1>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "text-info" })
-                                    @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+
+            
+                    <div class="box">
+                        <br/>
+                        <div class="alert alert-info alert-dismissible col-md-10 col-md-offset-1">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4>Termina el pedido que realizo tu amigo!</h4>
+                            Elegi las cantidades de los gustos.
+                        </div>
+                        <br />
+                        <div class="stepwizard">
+                            <div class="stepwizard-row setup-panel">
+                                <div class="stepwizard-step">
+                                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                    <p>Datos</p>
                                 </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "text-info" })
-                                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion del pedido", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
+                                <div class="stepwizard-step">
+                                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                                    <p>Gustos</p>
                                 </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "text-info" })
-                                    @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "text-info" })
-                                    @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
-                                </div>
-                                <button class="btn btn-success nextBtn btn-lg pull-center" type="button">Siguiente</button>
-
-                            </div>
-
-                            <div class="row setup-content" id="step-2">
-                                <h3>Seleccion de Gustos</h3> <BR>
-                                @foreach (GustoEmpanada item in Model.GustoEmpanada)
-                                {
-                                    <div class="form-group">
-                                        @Html.Label(item.Nombre, htmlAttributes: new { @class = "text-info col-md-3" })
-                                        @Html.Editor("Cantidad", new { htmlAttributes = new { @class = "form-control col-md-3", placeholder = "Ingrese Cantidad", type = "number", autocomplete = "off", id = item.IdGustoEmpanada } })
-                                        <br />
-                                    </div>
-
-                                }
-
-                                <br />
-
-                                <input type="button" id="btnConfirmarGustos" value="Confirmar Gustos" />
-
 
                             </div>
                         </div>
 
+
+                        <div class="box-body">
+                           
+
+
+                            <div class="form" role="form">
+
+                                <div class=" setup-content" id="step-1">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Datos del pedido</h3>
+                                    </div>
+                                    <input type="hidden" id="idPedido" name="idPedido" value="@Model.IdPedido" />
+                                    <input type="hidden" id="Token" name="token" value="@ViewBag.TokenInvitacion" />
+                                    <input type="hidden" id="IdUsuario" name="IdUsuario" value="@ViewBag.IdUsuario" />
+
+                                    <div class="form-group col-md-6 col-md-offset-3">
+                                        @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "section-info" })
+                                        @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
+                                    </div>
+                                    <div class="form-group col-md-6 col-md-offset-3">
+                                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "section-info" })
+                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion del pedido", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
+                                    </div>
+                                    <div class="form-group col-md-6 col-md-offset-3">
+                                        @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "section-info" })
+                                        @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-md-offset-3">
+                                        @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "section-info" })
+                                        @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off", disabled = "disabled", @readonly = "readonly" } })
+                                    </div>
+                                    
+                                    <div class="form-group col-lg-6 col-lg-offset-3">
+                                        <button class="btn btn-success nextBtn btn-lg btn-block pull-center" type="button">Siguiente</button>
+
+                                    </div>
+                                </div>
+
+                                <div class=" setup-content" id="step-2">
+                                    <h3>Seleccion de Gustos</h3> <BR>
+                                    @foreach (GustoEmpanada item in Model.GustoEmpanada)
+                                    {
+                                        <div class="form-group col-md-6 col-md-offset-3">
+                                            @Html.Label(item.Nombre, htmlAttributes: new { @class = "section-info" })
+                                            @Html.Editor("Cantidad", new { htmlAttributes = new { @class = "form-control col-md-3", placeholder = "Ingrese Cantidad", type = "number", autocomplete = "off", id = item.IdGustoEmpanada } })
+                                            <br />
+                                        </div>
+
+                                    }
+
+                                    <br />
+
+                                   
+                                    <div class="form-group col-lg-6 col-lg-offset-3">
+                                        <input type="button" id="btnConfirmarGustos"class="btn btn-success nextBtn btn-lg btn-block pull-center"  value="Confirmar Gustos" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
+
+
+                    <!-- /.box -->
                 </div>
+                <!-- /.col -->
             </div>
-        </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 </div>
 
 <div class="modal fade" id="confirmacionGustosModal" role="dialog">

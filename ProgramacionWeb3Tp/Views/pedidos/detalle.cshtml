@@ -5,70 +5,178 @@
 @{var totalUnidades = 0;}
 @{var total = 0;}
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="invoice-title">
-                <h2>Detalle del pedido</h2><h3 class="pull-right">Pedido # @Html.DisplayFor(model => model.IdPedido)</h3>
+
+
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/Home/Index/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Empanadas</b> </span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+
+                <ul class="nav navbar-nav">
+
+                    <li>
+                        <a href="/Home/index/" class="info"><i class="fa fa-arrow-left"></i> Volver al sitio </a>
+                    </li>
+
+                </ul>
+
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                        <strong>Facturado por:</strong><br>
-                        Ecommerce<br>
-                    </address>
+
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="~/Content/dist/img/avatar5.png" class="img-circle" alt="User Image">
                 </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>Metodo de entrega:</strong><br>
-                        Envio a domicilio<br>
-                    </address>
+                <div class="info">
+                    <h6>@Session["Usuario"]</h6>
+
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <address>
-                        <strong>Metodo de pago:</strong><br>
-                        Efectivo<br>
-                    </address>
-                    <address>
-                        <strong>Correo de contacto:</strong><br>
-                        @Html.DisplayFor(model => model.Usuario.Email)
-                    </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>Fecha de inicio de pedido:</strong><br>
-                        @Html.DisplayFor(model => model.FechaCreacion)<br>
-                    </address>
-                    <address>
-                        <strong>Fecha de finalizacion:</strong><br>
-                        @Html.DisplayFor(model => model.FechaModificacion)<br>
-                    </address>
-                </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Menu de opciones</li>
+                <li class="active">
+                    @Html.ActionLink("Mis pedidos", "Pedidos", "Pedidos", new { @class = "" })
+
+                </li>
+                <li class="">
+                    @Html.ActionLink("Iniciar pedido", "Iniciar", "Pedidos", new { area = "" }, new { @class = "" })
+                </li>
+                <li class="">
+                    @Html.ActionLink("Copiar Pedido", "Pedidos", new { area = "", Copia = "S" })
+                </li>
+                <li class="">
+                    @Html.ActionLink("Mis invitaciones", "Invitaciones", new { @class = "" })
+                </li>
+                <li>
+                    @Html.ActionLink("Cerrar sesion", "Salir", "Home")
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 1126px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Detalle del pedido
+               
+            </h1>
+        </section>
+
+        <div class="pad margin no-print">
+            <div class="callout callout-info" style="margin-bottom: 0!important;">
+                <h4><i class="fa fa-info"></i> Aclaración:</h4>
+                Este pedido se encuentra finalizado y no puede volver a abrirse o editar.
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Detalle del pedido</strong></h3>
+
+        <!-- Main content -->
+        <section class="invoice">
+            <!-- title row -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="page-header">
+                        <i class="fa fa-list"></i> Pedido numero #@Html.DisplayFor(model => model.IdPedido)
+                        <small class="pull-right">Consulta realizada al @DateTime.Now</small>
+                    </h2>
                 </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <td class="text-center"><strong>Gusto</strong></td>
-                                    <td class="text-center"><strong>Precio</strong></td>
-                                    <td class="text-center"><strong>Cantidad</strong></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (GustoEmpanada item in Model.GustoEmpanada)
-                                {
+                <!-- /.col -->
+            </div>
+            <!-- info row -->
+            <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    <strong>Realizado por</strong>
+                    <address>
+                        <strong>@Html.DisplayFor(model => model.Usuario.Email)</strong><br>
+                        <strong>En la fecha</strong>
+                        @Html.DisplayFor(model => model.FechaCreacion)<br>
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    <strong>Datos del pedido</strong>
+                    <address>
+                        @Html.DisplayFor(model => model.NombreNegocio)<br>
+                        @Html.DisplayFor(model => model.PrecioDocena)<br>
+                        @Html.DisplayFor(model => model.PrecioUnidad)<br>
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    <strong>Ultima modificacion:</strong><br>
+                    <br>
+                    @Html.DisplayFor(model => model.FechaModificacion)<br>
+
+                </div>
+                <div class="col-sm-6 invoice-col">
+                    <strong>Descripción del pedido:</strong><br>
+                    <br>
+                    @Html.DisplayFor(model => model.Descripcion)<br>
+
+                </div>
+                <div class="col-sm-6 invoice-col">
+                    <strong>Participantes:</strong><br>
+                    <br>
+                   
+                    @foreach (Usuario usuario in ViewBag.ListaDeUsuarios)
+                    {
+                   
+                      if (usuario.InvitacionPedido.Where(u => u.IdPedido == Model.IdPedido).Select(i => i.Completado).FirstOrDefault() == true)
+                        {
+                            @usuario.Email
+                            <p>Participo</p>
+
+                        }
+                        else
+                        {
+                            @usuario.Email
+                            <p>No Participo</p>
+                        }
+                   
+                    }
+
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <br /><br />
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="text-center">
+                                <th ><strong>Gusto</strong></th>
+                                <th class="text-center"><strong>Precio</strong></th>
+                                <th class="text-center"><strong>Cantidad</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach (GustoEmpanada item in Model.GustoEmpanada)
+                            {
                                 <tr class="text-center">
                                     <td class="text-center">@Html.Label(item.Nombre)</td>
                                     <td class="text-center">@Html.DisplayFor(model => model.PrecioUnidad)</td>
@@ -86,29 +194,48 @@
                                     @{ total = precioUnidad * totalUnidades;}
 
                                 </tr>
-                                }
-                                <tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
 
-                                    <td class="thick-line"></td>
-                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                    <td class="thick-line text-center">@total</td>
+            <div class="row">
+                <!-- accepted payments column -->
+                
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <p class="lead">Precio final</p>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th style="width:50%">Subtotal:</th>
+                                    <td>@total</td>
                                 </tr>
                                 <tr>
-                                    <td class="no-line"></td>
-                                    <td class="no-line text-center"><strong>Envio</strong></td>
-                                    <td class="no-line text-center">$0</td>
+                                    <th>Envio</th>
+                                    <td>$0</td>
                                 </tr>
+
                                 <tr>
-  
-                                    <td class="no-line"></td>
-                                    <td class="no-line text-center"><strong>Total</strong></td>
-                                    <td class="no-line text-center">@total</td>
+                                    <th>Total:</th>
+                                    <td>@total</td>
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
+                <!-- /.col -->
             </div>
-        </div>
+
+        </section>
+        <!-- /.content -->
+        <div class="clearfix"></div>
     </div>
+
 </div>

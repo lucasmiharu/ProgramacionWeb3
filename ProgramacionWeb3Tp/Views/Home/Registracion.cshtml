@@ -36,7 +36,15 @@
                     </li>
 
                     <li>
-                        <a class="page-scroll" href="/Home/Login/">Mi perfil</a>
+                        @if (@Session["Usuario"] != null)
+                        {
+                            <a class="page-scroll" href="/Pedidos/Pedidos/">Mi perfil(@Session["Usuario"])</a>
+                        }
+                        @if (@Session["Usuario"] == null)
+                        {
+                            <a class="page-scroll" href="/Home/Login/">Mi perfil</a>
+                        }
+
                     </li>
                 </ul>
             </div>

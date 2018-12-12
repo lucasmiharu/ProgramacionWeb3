@@ -55,6 +55,8 @@
             var pedidoId = $(e.relatedTarget).data('pedido-id');
             $(e.currentTarget).find('input[name="pedidoId"]').val(pedidoId);
 
+            var nombreNegocio = $(e.relatedTarget).data('pedido-nombre');
+            document.getElementById('nombreNegocio').innerHTML = nombreNegocio;
 
         });
     </script>

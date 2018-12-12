@@ -115,6 +115,7 @@ namespace Pedido_Empanadas.Controllers
           if ( ClsSesion.VerificarLogueo(ClsSesion.GetUsuarioLogueado()))
             {
                 ClsSesion.EliminarSesion();
+                Session["Usuario"] = null;
             }
 
             return RedirectToAction("Index");

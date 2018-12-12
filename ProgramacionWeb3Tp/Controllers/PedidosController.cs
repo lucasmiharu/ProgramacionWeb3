@@ -32,8 +32,19 @@ namespace ProgramacionWeb3Tp.Controllers
         {
 
             List<Pedido> pedidos = new List<Pedido>();
+            try
+            {
+                pedidos = _pedidoServicio.ObtenerPedidosPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
 
-            pedidos = _pedidoServicio.ObtenerPedidosPorUsuario(ClsSesion.GetUsuarioLogueado().IdUsuario);
+            }
+            
+            
+            int confirmados = _pedidoServicio.ObtenerInvitacionesConfirmadas(ClsSesion.GetUsuarioLogueado().IdUsuario);
+            ViewBag.InvitacionesConfirmadas = confirmados;
 
             if (Copia == "S")
                 ViewBag.ModoCopia = "S";
@@ -137,13 +148,6 @@ namespace ProgramacionWeb3Tp.Controllers
             }
         }
 
-        public ActionResult Detalle(Pedido pedido)
-        {
-            List<Pedido> pedidos = new List<Pedido>();
-
-            return View("detalle", pedido);
-        }
-
       
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
@@ -151,12 +155,12 @@ namespace ProgramacionWeb3Tp.Controllers
         {         
 
             Usuario us1 = new Usuario();
-            us1.IdUsuario = 8;
+            us1.IdUsuario = 5;
             us1.Email = "ramitasilva@gmail.com";
             us1.Password = "rama";
             
             Usuario us2 = new Usuario();
-            us2.IdUsuario = 9;
+            us2.IdUsuario = 4;
             us2.Email = "lucasmiharu@gmail.com";
             us2.Password = "lucas";
 
@@ -216,6 +220,7 @@ namespace ProgramacionWeb3Tp.Controllers
             Pedido detallepedido = new Pedido();
 
             detallepedido = _pedidoServicio.DetallePedido(idPedido);
+            ViewBag.ListaDeUsuarios = _pedidoServicio.ObtenerUsuariosInvitadosDePedido(detallepedido);
             if (detallepedido.IdEstadoPedido == 2)
             {
                 return View("Detalle", detallepedido);
@@ -225,6 +230,9 @@ namespace ProgramacionWeb3Tp.Controllers
                 return RedirectToAction("PedidoNoFinalizado");
             }
         }
+
+
+
         [HttpGet]
         public ActionResult PedidoNoFinalizado()
         {
