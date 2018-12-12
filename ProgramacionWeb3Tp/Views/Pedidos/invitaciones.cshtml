@@ -50,12 +50,14 @@
                     @Html.ActionLink("Iniciar pedido", "Iniciar", "Pedidos", new { area = "" }, new { @class = "" })
                 </li>
                 <li class="">
-                    @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos", new { area = "", Copia = "S" })
+                    @Html.ActionLink("Copiar Pedido", "Pedidos", new { area = "", Copia = "S" })
                 </li>
                 <li class="active">
                     @Html.ActionLink("Mis invitaciones", "Invitaciones", new { @class = "" })
                 </li>
-
+                <li>
+                    @Html.ActionLink("Cerrar sesion", "Salir", "Home")
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

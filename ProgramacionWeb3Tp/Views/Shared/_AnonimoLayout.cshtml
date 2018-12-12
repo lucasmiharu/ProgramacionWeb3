@@ -7,48 +7,18 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="@Url.Content("~/Content/agency.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/agency.min.css")" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Empanadas de la Abuela", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Productos", "Productos", "Home")</li>
-                    <li>@Html.ActionLink("Quienes somos", "Nosotros", "Home")</li>
-
-                </ul>
-                <li>@Html.ActionLink("Hace tu pedido ahora!", "Login", "Home", new { area = "" }, new { @class = "btn btn-success navbar-btn" })</li>
-            </div>
-        </div>
-    </div>*@
-    @*<div class="container body-content">*@
-        @RenderBody()
-        <hr />
-        <footer>
-            <p align="center">&copy; @DateTime.Now.Year - Empanadas de la Abuela</p>
-        </footer>
-    @*</div>*@
-    <script>
-        $('.multipleSelect').fastselect();
-    </script>
+    @RenderBody()
+    <hr />
+    <footer>
+        <p align="center">&copy; @DateTime.Now.Year - Empanadas de la Abuela</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/agency.js")
     @Scripts.Render("~/Scripts/agency.min.js")
-    @Scripts.Render("~/Scripts/contact_me.js")
-    @Scripts.Render("~/Scripts/jqBootstrapValidation.js")
-    
     @RenderSection("scripts", required: false)
 </body>
 </html>

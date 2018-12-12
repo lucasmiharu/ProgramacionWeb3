@@ -18,10 +18,8 @@
     @Scripts.Render("~/Scripts/bower_components/bootstrap/dist/js/bootstrap.min.js")
     @Scripts.Render("~/Content/dist/js/adminlte.min.js")
     <!--Admin estilos-->
-    <link rel="stylesheet" href="../../bower_components/select2/dist/css/select2.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-
+    <link href="@Url.Content("~/Content/build.min.css")" rel="stylesheet" type="text/css" />
+   
     <link href="@Url.Content("~/Scripts/bower_components/select2/dist/css/select2.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Scripts/bower_components/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Scripts/bower_components/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
@@ -31,7 +29,7 @@
     <link href="@Url.Content("~/Scripts/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/estilos.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/build.min.css")" rel="stylesheet" type="text/css" />
+    
     <link href="@Url.Content("~/Content/fastselect.min.css")" rel="stylesheet" type="text/css" />
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -57,7 +55,7 @@
             var pedidoId = $(e.relatedTarget).data('pedido-id');
             $(e.currentTarget).find('input[name="pedidoId"]').val(pedidoId);
 
-           
+
         });
     </script>
     <script>
@@ -69,13 +67,15 @@
         $(function () {
             //Initialize Select2 Elements
             $('.select2').select2()
-           
+
         })
     </script>
     @Scripts.Render("~/bundles/funcionesPropias")
     @Scripts.Render("~/Scripts/bower_components/select2/dist/js/select2.full.min.js")
     @Scripts.Render("~/Scripts/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js")
     @Scripts.Render("~/Scripts/bower_components/datatables.net/js/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/agency.js")
+    @Scripts.Render("~/Scripts/agency.min.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

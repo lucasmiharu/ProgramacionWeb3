@@ -1,4 +1,7 @@
-﻿@model ProgramacionWeb3Tp.Models.Usuario
+﻿@{
+    Html.RenderPartial("_EstiloIndex");
+}
+@model ProgramacionWeb3Tp.Models.Usuario
 
 
 @using (Html.BeginForm("RegistrarUsuario", "Home", "Post"))
@@ -17,6 +20,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
                         <a href="#page-top"></a>
+                    </li>
+
+                    <li>
+                        <a class="page-scroll" href="/">Inicio</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/#producto">Producto</a>
@@ -94,7 +101,7 @@
 
 
 
-                        </div>
+                    </div>
                 </div>
             </div>
         </section>

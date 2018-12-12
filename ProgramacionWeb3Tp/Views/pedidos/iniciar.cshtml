@@ -52,12 +52,14 @@
                     @Html.ActionLink("Iniciar pedido", "Iniciar", "Pedidos", new { area = "" }, new { @class = "" })
                 </li>
                 <li class="">
-                    @Html.ActionLink("Copiar Pedido", "Pedidos", "Pedidos", new { area = "", Copia = "S" })
+                    @Html.ActionLink("Copiar Pedido", "Pedidos", new { area = "", Copia = "S" })
                 </li>
                 <li class="">
                     @Html.ActionLink("Mis invitaciones", "Invitaciones", new { @class = "" })
                 </li>
-
+                <li>
+                    @Html.ActionLink("Cerrar sesion", "Salir", "Home")
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -67,7 +69,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Nuevo pedido 
+                Nuevo pedido
                 <small>desde cero</small>
             </h1>
 
@@ -75,16 +77,21 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-xs-10 col-xs-offset-1">
-                   
+                <div class="col-xs-12">
+
+
+                    <div class="box">
+
+                        <div class="box-body">
+
                             @using (Html.BeginForm("RegistrarPedido", "Pedidos", "Post"))
                             {
                                 @Html.AntiForgeryToken()
 
-                                <div class="container" align="center">
+                                
                                     <div id="login" align="center">
                                         <br />
-                                        <div class="alert alert-info alert-dismissible">
+                                        <div class="alert alert-info alert-dismissible col-md-10 col-md-offset-1">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <h4>Inicia un pedido desde cero</h4>
                                             Elegi los gustos y tus amigos completaran las cantidades.
@@ -109,44 +116,44 @@
 
 
 
-                                        <div class="box box-primary">
+                                     
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">Datos del pedido</h3>
                                             </div>
                                             <!-- /.box-header -->
                                             <!-- form start -->
-                                            <div class="box-body">
-                                                <div class="row setup-content" id="step-1">
-                                                    
-                                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                                                        <div class="form-group">
-                                                            @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "" })
-                                                            @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
-                                                            @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
-                                                        </div>
-                                                        <div class="form-group">
-                                                            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "" })
-                                                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion del pedido", autocomplete = "off" } })
-                                                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                                                        </div>
-                                                        <div class="form-group">
-                                                            @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "" })
-                                                            @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
-                                                            @Html.ValidationMessageFor(model => model.PrecioUnidad, "", new { @class = "text-danger" })
-                                                        </div>
-                                                        <div class="form-group">
-                                                            @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "" })
-                                                            @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
-                                                            @Html.ValidationMessageFor(model => model.PrecioDocena, "", new { @class = "text-danger" })
-                                                        </div>
+                                           
+                                                <div class=" setup-content" id="step-1">
 
-                                                        <div class="form-group col-lg-6 col-lg-offset-3">
-                                                            <button class="btn btn-success nextBtn btn-lg btn-block pull-center" type="button">Siguiente</button>
-                                                        </div>
-                                                   
-                                                    
+                                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                                    <div class="form-group col-md-6 col-md-offset-3">
+                                                        @Html.LabelFor(model => model.NombreNegocio, htmlAttributes: new { @class = "" })
+                                                        @Html.EditorFor(model => model.NombreNegocio, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del negocio", autocomplete = "off" } })
+                                                        @Html.ValidationMessageFor(model => model.NombreNegocio, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-md-offset-3">
+                                                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "" })
+                                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripcion del pedido", autocomplete = "off" } })
+                                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-md-offset-3">
+                                                        @Html.LabelFor(model => model.PrecioUnidad, htmlAttributes: new { @class = "" })
+                                                        @Html.EditorFor(model => model.PrecioUnidad, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
+                                                        @Html.ValidationMessageFor(model => model.PrecioUnidad, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-md-offset-3">
+                                                        @Html.LabelFor(model => model.PrecioDocena, htmlAttributes: new { @class = "" })
+                                                        @Html.EditorFor(model => model.PrecioDocena, new { htmlAttributes = new { @class = "form-control", placeholder = "Precio unitario", autocomplete = "off" } })
+                                                        @Html.ValidationMessageFor(model => model.PrecioDocena, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group col-lg-6 col-lg-offset-3">
+                                                        <button class="btn btn-success nextBtn btn-lg btn-block pull-center" type="button">Siguiente</button>
+                                                    </div>
+
+
                                                 </div>
-                                                <div class="row setup-content" id="step-2">
+                                                <div class=" setup-content" id="step-2">
                                                     <div id="ListInvitados" class="form-group col-lg-6 col-lg-offset-3">
                                                         @if ((ViewBag.invitados != null))
 
@@ -161,12 +168,12 @@
 
 
                                                     </div>
-                                                    <div  class="form-group col-lg-6 col-lg-offset-3">
+                                                    <div class="form-group col-lg-6 col-lg-offset-3">
                                                         <button class="btn btn-success nextBtn btn-lg btn-block pull-center" type="button">Siguiente</button>
                                                     </div>
-                                                    
+
                                                 </div>
-                                                <div class="row setup-content" id="step-3">
+                                                <div class=" setup-content" id="step-3">
                                                     <div id="ListInvitados" class="form-group col-lg-6 col-lg-offset-3">
 
                                                         @if ((ViewBag.gustos != null))
@@ -186,24 +193,24 @@
                                                         <input type="submit" name="submit" class="btn btn-info" value="Iniciar pedido" onClick="return true;" />
                                                     </div>
 
-                                                   
+
                                                 </div>
-                                            </div>
-                                        </div>
+                                         
+                            
 
                                     </div>
-                                 </div>
+                                
+
+                            }
+                            </div>
+                        </div>
 
 
-                                        }
-
-
-                                    
-                    <!-- /.box -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
         </section>
         <!-- /.content -->
     </div>
