@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ProgramacionWeb3Tp.Servicios
 {
-    public class EmailService
+    public static class EmailService
     {
         /*
         public void EnviarEmailResponsable(Pedido pedido)
@@ -55,14 +55,18 @@ namespace ProgramacionWeb3Tp.Servicios
         */
 
 
-        public void EnviarEmailInvitados(InvitacionPedido invitacion)
+        public static  void EnviarEmailInvitados(InvitacionPedido invitacion)
         {
-           
-            MailMessage email = new MailMessage("ramitasilva@gmail.com", "ramitasilva@gmail.com");
+                                   
+
+            MailMessage email = new MailMessage("empanadadelaabuelaprogra@gmail.com", invitacion.Usuario.Email);
             //MailMessage email = new MailMessage("ramitasilva@gmail.com", invitacion.Usuario.Email);
 
-            email.Subject = "Te invitó /* + invitacion.Pedido.Usuario.Email + */ para pedir empanadas";            
-            email.Body = "Has sido invitado para realizar un pedido de empanadas http://localhost:50846/Pedidos/ElegirToken/" + invitacion.Token;
+            email.Subject = "Te invitó " + invitacion.Pedido.Usuario.Email + " para pedir empanadas";
+
+            
+
+            email.Body = "Has sido invitado para realizar un pedido de empanadas http://localhost:59120/Pedidos/ElegirToken/" + invitacion.Token;
 
             //defino valores del SMTP
             SmtpClient smtp = new SmtpClient()

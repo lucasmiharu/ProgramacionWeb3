@@ -88,12 +88,14 @@ namespace ProgramacionWeb3Tp.Controllers
             Pedido nuevo;
 
 
-            if (ModelState.IsValid && Request["SelecInvitados"] != null)
+            if (ModelState.IsValid && Request["SelecInvitados"] != null && Request["SelecGustos"] != null )
             {
 
                 nuevo = _pedidoServicio.CrearPedido(pedido, Request["SelecInvitados"].Split(','));
                 _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
                 _pedidoServicio.SetGustos(nuevo, Request["SelecGustos"].Split(','));
+
+                _pedidoServicio.EnviarMail(_pedidoServicio.ObtenerTodosLosUsuariosInvitados(nuevo), nuevo);
 
                 ViewBag.mensaje = "Se genero el pedido nro: " + nuevo.IdPedido;
                 return RedirectToAction("Pedidos");
@@ -105,6 +107,7 @@ namespace ProgramacionWeb3Tp.Controllers
                 List<GustoEmpanada> gustos = _pedidoServicio.GetGustoEmpanadas();
                 ViewBag.invitados = invitados;
                 ViewBag.gustos = gustos;
+                ViewBag.mensaje = "Falta informacion para iniciar el pedido ";
                 return View("iniciar", pedido);
             }
         }
@@ -245,13 +248,17 @@ namespace ProgramacionWeb3Tp.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult ElegirToken(System.Guid id)
         {
-            if (Session["usuario"] == null)
+
+          
+
+            if (ClsSesion.GetUsuarioLogueado() == null)
             {
                 return RedirectToAction("Login", "Home", new { redirigir = "/Pedidos/ElegirToken/" + id });
             }
-            usuarioLogueado = _pedidoServicio.BuscarUsuarioById(Convert.ToInt32(Session["usuario"]));
+            usuarioLogueado = ClsSesion.GetUsuarioLogueado();
             //Guid token = Guid.Parse(tokn);
             Pedido pedido = _pedidoServicio.ObtenerPedidoByToken(id);
             if (!(usuarioLogueado.IdUsuario == pedido.InvitacionPedido.Where(i => i.Token == id).Select(u => u.IdUsuario).FirstOrDefault()))

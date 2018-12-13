@@ -51,7 +51,8 @@ namespace Pedido_Empanadas.Controllers
         {
             Usuario usrLogueado;
 
-            
+            if (ModelState.IsValid)
+            {
                 usrLogueado =_usuarioServicio.LoguearUsuario(usr);
 
                 if (usrLogueado == null)
@@ -73,7 +74,9 @@ namespace Pedido_Empanadas.Controllers
                 //ClsSesion.EliminarSesion();
 
                 return RedirectToAction("Pedidos","Pedidos");
-                }                                                   
+                }
+            }
+            else { return View("Login", usr); }
 
         }
 

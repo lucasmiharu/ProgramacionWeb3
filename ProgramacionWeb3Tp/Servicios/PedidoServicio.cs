@@ -14,8 +14,7 @@ namespace ProgramacionWeb3Tp.Servicios
     {
         private static Pedidos ctx = new Pedidos();
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
-        EmailService es = new EmailService();
-
+     
         public Pedido ObtenerPedidoPorId(int id)
         {
             Pedido pedido = (from u in ctx.Pedido
@@ -57,16 +56,19 @@ namespace ProgramacionWeb3Tp.Servicios
         public void SetInvitados(Pedido pedido, String[] Invitados)
         {
             int idUsr;
-                        
+                                   
             InvitacionPedido Invitacion = new InvitacionPedido();
                                     
             for (int i = 0; i < Invitados.Count(); i++)
             {
 
                 int.TryParse(Invitados[i], out idUsr);
-
+                                
                 Invitacion.IdUsuario = idUsr;
                 Invitacion.IdPedido = pedido.IdPedido;
+                Invitacion.Token = new Guid(new Md5Hash().GetMD5((idUsr.ToString() + pedido.FechaCreacion)));
+                Invitacion.Completado = false;
+
 
                 ctx.InvitacionPedido.Add(Invitacion);
                 ctx.SaveChanges();
@@ -259,22 +261,35 @@ namespace ProgramacionWeb3Tp.Servicios
         
         public void EnviarMail(List<Usuario> usuariosAEnviarInvitacion, Pedido pedido)
         {
-            foreach (Usuario invitado in usuariosAEnviarInvitacion)
-            {
-                Usuario usuarioEncontrado = ctx.Usuario.SingleOrDefault(x => x.IdUsuario == invitado.IdUsuario);
-                Pedido pedidoEncontrado = ctx.Pedido.SingleOrDefault(p => p.IdPedido == pedido.IdPedido);
 
-                InvitacionPedido invitacionPedido = new InvitacionPedido
-                {
-                    Pedido = pedidoEncontrado,
-                    Usuario = usuarioEncontrado,
-                    Token = new Guid(new Md5Hash().GetMD5((usuarioEncontrado.Email + pedidoEncontrado.FechaCreacion))),
-                    Completado = false,
-                };
-                ctx.InvitacionPedido.Add(invitacionPedido);
-                ctx.SaveChanges();
-                es.EnviarEmailInvitados(invitacionPedido);
+            Pedido pedidoEncontrado = ctx.Pedido.SingleOrDefault(p => p.IdPedido == pedido.IdPedido);
+
+            foreach (InvitacionPedido invitado in pedidoEncontrado.InvitacionPedido)
+            {
+                EmailService.EnviarEmailInvitados(invitado);
+
             }
+
+
+            //    foreach (Usuario invitado in usuariosAEnviarInvitacion)
+            //{
+            //    Usuario usuarioEncontrado = ctx.Usuario.SingleOrDefault(x => x.IdUsuario == invitado.IdUsuario);
+               
+
+
+            //    pedidoEncontrado.InvitacionPedido
+
+            //    InvitacionPedido invitacionPedido = new InvitacionPedido
+            //    {
+            //        Pedido = pedidoEncontrado,
+            //        Usuario = usuarioEncontrado,
+            //        Token = new Guid(new Md5Hash().GetMD5((usuarioEncontrado.Email + pedidoEncontrado.FechaCreacion))),
+            //        Completado = false,
+            //    };
+                //ctx.InvitacionPedido.Add(invitacionPedido);
+                //ctx.SaveChanges();
+               
+           // }
         }
 
                 public void EnviarInvitacionesDesdeUnaListaDeUsuarios(List<Usuario> usuarios, Pedido pedido)
@@ -292,7 +307,7 @@ namespace ProgramacionWeb3Tp.Servicios
                 };
                 ctx.InvitacionPedido.Add(invitacionPedido);
                 ctx.SaveChanges();
-                es.EnviarEmailInvitados(invitacionPedido);
+                EmailService.EnviarEmailInvitados(invitacionPedido);
             }
         }        
 
