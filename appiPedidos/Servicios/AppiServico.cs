@@ -24,7 +24,11 @@ namespace appiPedidos.Servicios
             MensajeAppi msj = new MensajeAppi();
             try
             {
-                Pedido pedido = ObtenerPedidoPorId(ctx.InvitacionPedido.Where(t => t.Token == GustosUsuario.Token && t.IdUsuario == GustosUsuario.IdUsuario).FirstOrDefault().IdPedido);
+                InvitacionPedido invitado = GetInvitacionPedidoPorToken(GustosUsuario.Token.ToString(), GustosUsuario.IdUsuario);
+
+                Pedido pedido = ObtenerPedidoPorId(invitado.IdPedido);
+
+              //  Pedido pedido = ObtenerPedidoPorId(ctx.InvitacionPedido.Where(t => t.Token == GustosUsuario.Token && t.IdUsuario == GustosUsuario.IdUsuario).FirstOrDefault().IdPedido);
 
                 foreach (var gustoSolicitados in GustosUsuario.GustosEmpanadasCantidad)
                 {
@@ -108,8 +112,16 @@ namespace appiPedidos.Servicios
 
         public InvitacionPedido GetInvitacionPedidoPorToken(string token, int idusuario)
         {
+            Guid gid;
+            string strgui;
+
+            gid = Guid.Parse(token);
+
+            strgui = token;
+
+
             var invitacion = (from u in condb.InvitacionPedido
-                             where u.Token == Guid.Parse(token) && u.IdUsuario== idusuario
+                             where u.Token == gid && u.IdUsuario== idusuario
                              select u).FirstOrDefault();
 
            return invitacion;

@@ -66,10 +66,10 @@ $(document).ready(function () {
     $('#btnConfirmarGustos').on('click', function () {
         var pedido = new Object();
           
-        pedido.IdPedido = $('#idPedido').val();
+      //  pedido.IdPedido = $('#idPedido').val();
         pedido.IdUsuario = $('#IdUsuario').val();
-     //   pedido.Token = $('#Token').val();       
-       var GustosEmpanadasCantidad = [];
+        pedido.Token = $('#Token').val();       
+        var GustosEmpanadasCantidad = [];
        
 
         $("input[name=Cantidad]").each(function () {      

@@ -3,52 +3,7 @@
     ViewBag.Title = "Error";
 }
 
-@{
-    Html.RenderPartial("_EstiloIndex");
-}
 
-
-<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Empanadas de la Abuela</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/">Inicio</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#producto">Producto</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#gustos">Gustos</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#pedidos">Pedidos</a>
-                </li>
-
-                <li>
-                    @if (@Session["Usuario"] != null)
-                    {
-                        <a class="page-scroll" href="/Pedidos/Pedidos/">Mi perfil(@Session["Usuario"])</a>
-                    }
-                    @if (@Session["Usuario"] == null)
-                    {
-                        <a class="page-scroll" href="/Home/Login/">Mi perfil</a>
-                    }
-
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <header>
     <section id="login">
         <div class="container">

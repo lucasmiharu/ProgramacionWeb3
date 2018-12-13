@@ -307,6 +307,7 @@
     <Content Include="Views\Pedidos\invitaciones.cshtml" />
     <Content Include="Views\Pedidos\copiar.cshtml" />
     <Content Include="Views\Pedidos\PedidoNoFinalizado.cshtml" />
+    <Content Include="Views\Home\error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
