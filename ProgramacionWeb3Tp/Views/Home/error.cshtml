@@ -9,8 +9,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Pagina no encontrada!</h2>
-                    <h3 class="section-subheading section-info">Lo siento, la pagina no existe, por favor reintente</h3>
+
+                    @if (TempData["mensaje"] != null)
+                    {
+                    <h2 class="section-heading">@TempData["mensaje"]</h2>
+                        <h3 class="section-subheading section-info">Lo siento, por favor reintente</h3>
+                    }
+                    else
+                    {
+                        <h2 class="section-heading">Pagina no encontrada!</h2>
+                        <h3 class="section-subheading section-info">Lo siento, la pagina no existe, por favor reintente</h3>
+                    }
                 </div>
             </div>
             <div class="row">

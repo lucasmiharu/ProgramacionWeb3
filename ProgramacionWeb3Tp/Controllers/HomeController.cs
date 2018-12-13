@@ -21,12 +21,14 @@ namespace Pedido_Empanadas.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet]        
         public ActionResult Error()
         {
-            
+            ClsSesion.EliminarSesion();
             return View();
         }
+
+      
 
         public ActionResult Productos()
         {

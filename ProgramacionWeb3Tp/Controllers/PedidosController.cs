@@ -252,7 +252,18 @@ namespace ProgramacionWeb3Tp.Controllers
         public ActionResult ElegirToken(System.Guid id)
         {
 
-          
+            Pedido pedido = _pedidoServicio.ObtenerPedidoByToken(id);
+
+            if (pedido == null)
+            {
+                TempData["mensaje"] = "Identificacion invalida";
+                return RedirectToAction("Error", "Home");
+            }
+            else if (pedido.IdEstadoPedido == 2)
+            {
+                TempData["mensaje"] = "No se puede elegir los gustos por que el pedido ya fue cerrado";
+                return RedirectToAction("Error", "Home");
+            }
 
             if (ClsSesion.GetUsuarioLogueado() == null)
             {
@@ -260,7 +271,7 @@ namespace ProgramacionWeb3Tp.Controllers
             }
             usuarioLogueado = ClsSesion.GetUsuarioLogueado();
             //Guid token = Guid.Parse(tokn);
-            Pedido pedido = _pedidoServicio.ObtenerPedidoByToken(id);
+           
             if (!(usuarioLogueado.IdUsuario == pedido.InvitacionPedido.Where(i => i.Token == id).Select(u => u.IdUsuario).FirstOrDefault()))
             {
                 TempData["mensaje"] = "Acceso invalido";
