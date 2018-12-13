@@ -159,31 +159,43 @@
                                                     <div id="ListInvitados" class="form-group col-lg-6 col-lg-offset-3">
                                                         @if ((ViewBag.invitados != null))
 
-                                                        {
-                                                            <select class="form-control col-6 select2 select2-hidden-accessible " multiple="" name="SelecInvitados" data-placeholder="Seleccione invitados" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                                @foreach (Usuario item in ViewBag.invitados)
-                                                                {
-                                                                    selec = false;
-                                                                    foreach (InvitacionPedido invitado in Model.InvitacionPedido)
-                                                                    {
-                                                                        if (item.IdUsuario == invitado.IdUsuario)
-                                                                        {
-                                                                            selec = true;
-                                                                        }
+    {
+                                                    <select class="form-control col-6 select2 select2-hidden-accessible " multiple="" name="SelecInvitados" data-placeholder="Seleccione invitados" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                        @foreach (Usuario item in ViewBag.invitados)
+    {
+        selec = false;
+        foreach (InvitacionPedido invitado in Model.InvitacionPedido)
+        {
+            if (item.IdUsuario == invitado.IdUsuario)
+            {
+                selec = true;
+            }
 
-                                                                    }
+        }
 
-                                                                    if (selec)
-                                                                    {
-                                                                        <option id="@item.IdUsuario" value="@item.IdUsuario" selected="selected"> @item.Email </option>}
-                                                                    else
-                                                                    {
-                                                                        <option id="@item.IdUsuario" value="@item.IdUsuario">@item.Email</option>}
+        if (selec)
+        {
+                                                    <option id="@item.IdUsuario" value="@item.IdUsuario" selected="selected"> @item.Email </option>}
+else
+{
+                                                    <option id="@item.IdUsuario" value="@item.IdUsuario">@item.Email</option>}
 
-                                                                }
-                                                            </select>
-                                                        }
-
+}
+                                                    </select>
+}
+                                                        <br>
+                                                        <div style="display:flex;justify-content:center;align-items:center;">
+                                                            <div class="col-sm-6" style="text-align:right">Enviar invitacion:</div>
+                                                            <div class="col-sm-6" style="text-align:left">
+                                                                <SELECT NAME="enviarInvitacion" id="invitacion" class="form-control" required>
+                                                                    <OPTION VALUE="1">A nadie</OPTION>
+                                                                    <OPTION VALUE="2">Re-Enviar invitacion a todos</OPTION>
+                                                                    <OPTION VALUE="3">Enviar solo a los nuevos</OPTION>
+                                                                    <OPTION VALUE="4">Re-Enviar solo a los que no eligieron gustos</OPTION>
+                                                                </SELECT>
+                                                            </div>
+                                                        </div>
+                                                        <br>
 
                                                     </div>
                                                     <div class="form-group col-lg-6 col-lg-offset-3">

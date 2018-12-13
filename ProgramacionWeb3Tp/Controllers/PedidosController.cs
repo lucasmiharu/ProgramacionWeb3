@@ -152,9 +152,13 @@ namespace ProgramacionWeb3Tp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
         public ActionResult EditarPedido(Pedido pedido)
-        {         
+        {
 
-            Usuario us1 = new Usuario();
+            int envioInvitacion = _pedidoServicio.ObtenerEnviarInvitacion(pedido);
+
+
+
+            /*Usuario us1 = new Usuario();
             us1.IdUsuario = 5;
             us1.Email = "ramitasilva@gmail.com";
             us1.Password = "rama";
@@ -169,6 +173,8 @@ namespace ProgramacionWeb3Tp.Controllers
             List<Usuario> usuariosAEnviarInvitacion = new List<Usuario>();
             usuariosAEnviarInvitacion.Add(us1);
             usuariosAEnviarInvitacion.Add(us2);
+            */
+            List<Usuario> usuariosAEnviarInvitacion = _pedidoServicio.ObtenerUsuariosInvitadosDePedido(pedido);
 
             _pedidoServicio.EnviarMail(usuariosAEnviarInvitacion, pedido);
             
