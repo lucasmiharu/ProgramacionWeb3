@@ -25,8 +25,15 @@ namespace ProgramacionWeb3Tp.Servicios
 
         public int GetNuevoId()
         {
-            var result = ctx.Pedido.Max(p => p.IdPedido);
-
+            int result;
+            try
+            {
+                 result =(int) ctx.Pedido.Max(p => p.IdPedido);
+            }
+            catch(Exception ex)
+            {
+                result = 0;
+            }
             return result += 1;
         }
 
@@ -336,17 +343,11 @@ namespace ProgramacionWeb3Tp.Servicios
             return false;
         }
 
-        public int ObtenerEnviarInvitacion(Pedido pedido)
+       
+
+        public List<Usuario> DeterminarEnviosDeInvitacionSegunEstado(int IdEnviarInvitacion, Pedido pedido)
         {
-            int envioInvitacion = pedido.IdPedido;
-
-            return envioInvitacion;
-        }
-
-        public List<Usuario> DeterminarEnviosDeInvitacionSegunEstado(Pedido pedido)
-        {
-            int IdEnviarInvitacion = ObtenerEnviarInvitacion(pedido);
-
+            
             List<Usuario> usuariosAInvitar = new List<Usuario>();
 
             switch (IdEnviarInvitacion)

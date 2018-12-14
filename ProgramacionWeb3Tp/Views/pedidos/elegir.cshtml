@@ -142,22 +142,32 @@
                                 </div>
 
                                 <div class=" setup-content" id="step-2">
-                                    <h3>Seleccion de Gustos</h3> <BR>
-                                    @foreach (GustoEmpanada item in Model.GustoEmpanada)
+                                   
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Seleccion de Gustos</h3>
+                                    </div>
+
+
+                                    @foreach (var gusto in Model.GustoEmpanada)
                                     {
                                         <div class="form-group col-md-6 col-md-offset-3">
-                                            @Html.Label(item.Nombre, htmlAttributes: new { @class = "section-info" })
-                                            @Html.Editor("Cantidad", new { htmlAttributes = new { @class = "form-control col-md-3", placeholder = "Ingrese Cantidad", type = "number", autocomplete = "off", id = item.IdGustoEmpanada } })
-                                            <br />
-                                        </div>
+                                            @Html.Label(gusto.Nombre, htmlAttributes: new { @class = "section-info" })
 
+                                            @if (Model.InvitacionPedidoGustoEmpanadaUsuario.Where(x => x.IdUsuario == ViewBag.IdUsuario && x.IdPedido == Model.IdPedido && x.IdGustoEmpanada == gusto.IdGustoEmpanada).Count() > 0)
+                                            {
+                                                <input class="form-control col-md-3" type="number" id="@gusto.IdGustoEmpanada" name="gustoEmpanada_@gusto.IdGustoEmpanada" value="@Model.InvitacionPedidoGustoEmpanadaUsuario.Where(x=>x.IdPedido == Model.IdPedido && x.IdUsuario == ViewBag.IdUsuario && x.IdGustoEmpanada == gusto.IdGustoEmpanada).First().Cantidad" />
+                                            }
+                                            else
+                                            {
+                                                <input class="form-control col-md-3" type="number" id="@gusto.IdGustoEmpanada" value="0" />
+                                            }
+                                        </div>
                                     }
 
-                                    <br />
 
-                                   
+
                                     <div class="form-group col-lg-6 col-lg-offset-3">
-                                        <input type="button" id="btnConfirmarGustos"class="btn btn-success nextBtn btn-lg btn-block pull-center"  value="Confirmar Gustos" />
+                                        <input type="button" id="btnConfirmarGustos" class="btn btn-success nextBtn btn-lg btn-block pull-center" value="Confirmar Gustos" />
                                     </div>
 
                                 </div>

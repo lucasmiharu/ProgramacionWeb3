@@ -156,31 +156,10 @@ namespace ProgramacionWeb3Tp.Controllers
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
         public ActionResult EditarPedido(Pedido pedido)
         {
+            int IdEnvioMail=0;
 
-            int envioInvitacion = _pedidoServicio.ObtenerEnviarInvitacion(pedido);
-
-
-
-            /*Usuario us1 = new Usuario();
-            us1.IdUsuario = 5;
-            us1.Email = "ramitasilva@gmail.com";
-            us1.Password = "rama";
-            
-            Usuario us2 = new Usuario();
-            us2.IdUsuario = 4;
-            us2.Email = "lucasmiharu@gmail.com";
-            us2.Password = "lucas";
-
-
-
-            List<Usuario> usuariosAEnviarInvitacion = new List<Usuario>();
-            usuariosAEnviarInvitacion.Add(us1);
-            usuariosAEnviarInvitacion.Add(us2);
-            */
-            List<Usuario> usuariosAEnviarInvitacion = _pedidoServicio.ObtenerUsuariosInvitadosDePedido(pedido);
-
-            _pedidoServicio.EnviarMail(usuariosAEnviarInvitacion, pedido);
-            
+            int.TryParse(Request["enviarInvitacion"],out  IdEnvioMail);
+                                                                       
 
             //si eligio invitados y gustos sigo
             if (ModelState.IsValid && Request["SelecInvitados"] != null && Request["SelecGustos"] != null)
@@ -194,6 +173,12 @@ namespace ProgramacionWeb3Tp.Controllers
                 _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
                                 
                 _pedidoServicio.SetGustos(nuevo, Request["SelecGustos"].Split(','));
+
+                if (IdEnvioMail > 1)
+                {
+                    List<Usuario> usuariosAEnviarInvitacion = _pedidoServicio.DeterminarEnviosDeInvitacionSegunEstado(IdEnvioMail, pedido);
+                    _pedidoServicio.EnviarMail(usuariosAEnviarInvitacion, pedido);
+                }
 
                 ViewBag.mensaje = "Se edito el pedido nro: " + nuevo.IdPedido;
                 return RedirectToAction("Pedidos");
