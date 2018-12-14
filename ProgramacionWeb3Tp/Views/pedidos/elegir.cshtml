@@ -155,11 +155,11 @@
 
                                             @if (Model.InvitacionPedidoGustoEmpanadaUsuario.Where(x => x.IdUsuario == ViewBag.IdUsuario && x.IdPedido == Model.IdPedido && x.IdGustoEmpanada == gusto.IdGustoEmpanada).Count() > 0)
                                             {
-                                                <input class="form-control col-md-3" type="number" id="@gusto.IdGustoEmpanada" name="gustoEmpanada_@gusto.IdGustoEmpanada" value="@Model.InvitacionPedidoGustoEmpanadaUsuario.Where(x=>x.IdPedido == Model.IdPedido && x.IdUsuario == ViewBag.IdUsuario && x.IdGustoEmpanada == gusto.IdGustoEmpanada).First().Cantidad" />
+                                                <input class="form-control col-md-3" type="number" id="@gusto.IdGustoEmpanada" name="Cantidad" value="@Model.InvitacionPedidoGustoEmpanadaUsuario.Where(x=>x.IdPedido == Model.IdPedido && x.IdUsuario == ViewBag.IdUsuario && x.IdGustoEmpanada == gusto.IdGustoEmpanada).First().Cantidad" />
                                             }
                                             else
                                             {
-                                                <input class="form-control col-md-3" type="number" id="@gusto.IdGustoEmpanada" value="0" />
+                                                <input class="form-control col-md-3" type="number" id="@gusto.IdGustoEmpanada" name="Cantidad" value="0" />
                                             }
                                         </div>
                                     }

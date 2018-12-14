@@ -1,223 +1,271 @@
-﻿
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-lead-in">Llego una nueva forma de realizar pedidos!</div>
-                <div class="intro-lead-in">Empezas el pedido y tus amigos lo terminan</div>
-                <a href="/Home/Registracion/" class="page-scroll btn btn-xl">Comenza ahora!</a>
+﻿@using ProgramacionWeb3Tp.Models
+@{
+    Html.RenderPartial("_EstiloIndex");
+}
+<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Empanadas de la Abuela</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/">Inicio</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/#producto">Producto</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/#gustos">Gustos</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/#pedidos">Pedidos</a>
+                </li>
+
+                <li>
+
+                    @if (@ClsSesion.GetUsuarioLogueado() != null)
+                    {
+                        <a class="page-scroll" href="/Pedidos/Pedidos/">Mi perfil(@ClsSesion.GetEmailLogueado())</a>
+                    }
+                    else
+                    {
+                        @*<a class="page-scroll" href="/Home/Login/">Iniciar Sesion</a>*@
+
+                        @Html.ActionLink("Ya tengo cuenta", "Login", "Home", new { area = "" }, new { @class = "page-scroll" })
+                    }
+
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Llego una nueva forma de realizar pedidos!</div>
+            <div class="intro-lead-in">Empezas el pedido y tus amigos lo terminan</div>
+            <a href="/Home/Registracion/" class="page-scroll btn btn-xl">Comenza ahora!</a>
+        </div>
+    </div>
+</header>
+<!-- Seccion producto -->
+<section id="producto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Producto</h2>
+
             </div>
         </div>
-    </header>
-    <!-- Seccion producto -->
-    <section id="producto">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Producto</h2>
-
-                </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Variedad de gustos</h4>
+                <p class="text-muted">Agregamos nuevos gustos</p>
             </div>
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Variedad de gustos</h4>
-                    <p class="text-muted">Agregamos nuevos gustos</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Comparti tus pedidos</h4>
-                    <p class="text-muted">Sumamos la posibilidad de compartir pedidos,<br /> para que tus amigos tambien los realicen </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Rapido y confiable</h4>
-                    <p class="text-muted">Realizas el pedido en pocos pasos</p>
-                </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Comparti tus pedidos</h4>
+                <p class="text-muted">Sumamos la posibilidad de compartir pedidos,<br /> para que tus amigos tambien los realicen </p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Rapido y confiable</h4>
+                <p class="text-muted">Realizas el pedido en pocos pasos</p>
             </div>
         </div>
-    </section>
-    <!--seccion gustos -->
-    <section id="gustos" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Gustos</h2>
+    </div>
+</section>
+<!--seccion gustos -->
+<section id="gustos" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Gustos</h2>
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="../images/emp/carne.jpg" class="img-gustos" alt="" height="250">
-                    <div class="portfolio-caption">
-                        <h4>Carne</h4>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="../images/emp/jamonyqueso.jpg" class="img-gustos" alt="" height="250">
-
-                    <div class="portfolio-caption">
-                        <h4>Jamon y queso</h4>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="../images/emp/humita.jpg" class="img-gustos" alt="" height="250">
-
-                    <div class="portfolio-caption">
-                        <h4>Humita</h4>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="../images/emp/quesoycebolla.jpg" class="img-gustos" alt="" height="250">
-
-                    <div class="portfolio-caption">
-                        <h4>Queso y cebolla</h4>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="../images/emp/verdura.jpg" class="img-gustos" alt="" height="250px">
-
-                    <div class="portfolio-caption">
-                        <h4>Verdura</h4>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="../images/emp/pollo.jpg" class="img-gustos" alt="" height="250">
-
-                    <div class="portfolio-caption">
-                        <h4>Pollo</h4>
-
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
-    <!-- Seccion pedidos -->
-    <section id="pedidos">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Como funciona?</h2>
-                    <h3 class="section-subheading text-muted">En simples pasos</h3>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/carne.jpg" class="img-gustos" alt="" height="250">
+                <div class="portfolio-caption">
+                    <h4>Carne</h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="../images/slider1.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
+            <div class="col-md-4 col-sm-6 portfolio-item">
 
-                                    <h4 class="subheading">Inicias el pedido</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Colocas los datos necesarios para comenzar el pedido</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="../images/slider2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/jamonyqueso.jpg" class="img-gustos" alt="" height="250">
 
-                                    <h4 class="subheading">Elegis los amigos que participan</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Ellos van a elegir la cantidad de cada gusto que hayas elegido vos</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="../images/slider3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="subheading">Elegis los gustos que vos queres</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Podes elegir los gustos que vos quieras, siempre estan disponibles!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="../images/fondo.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="subheading">Completar el pedido</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Una vez que el pedido es completado por alguno de tus amigos, se realiza el pedido. Asi de facil!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h3>
-                                    A
-                                    <br>disfrutar!
+                <div class="portfolio-caption">
+                    <h4>Jamon y queso</h4>
 
-                                </h3>
-                            </div>
-                        </li>
-                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/humita.jpg" class="img-gustos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>Humita</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/quesoycebolla.jpg" class="img-gustos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>Queso y cebolla</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/verdura.jpg" class="img-gustos" alt="" height="250px">
+
+                <div class="portfolio-caption">
+                    <h4>Verdura</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/pollo.jpg" class="img-gustos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>Pollo</h4>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<!-- Seccion pedidos -->
+<section id="pedidos">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Como funciona?</h2>
+                <h3 class="section-subheading text-muted">En simples pasos</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/slider1.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+
+                                <h4 class="subheading">Inicias el pedido</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Colocas los datos necesarios para comenzar el pedido</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/slider2.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+
+                                <h4 class="subheading">Elegis los amigos que participan</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Ellos van a elegir la cantidad de cada gusto que hayas elegido vos</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/slider3.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">Elegis los gustos que vos queres</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Podes elegir los gustos que vos quieras, siempre estan disponibles!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/fondo.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">Completar el pedido</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Una vez que el pedido es completado por alguno de tus amigos, se realiza el pedido. Asi de facil!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h3>
+                                A
+                                <br>disfrutar!
+
+                            </h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 

@@ -63,24 +63,35 @@ namespace ProgramacionWeb3Tp.Servicios
         public void SetInvitados(Pedido pedido, String[] Invitados)
         {
             int idUsr;
-                                   
-            InvitacionPedido Invitacion = new InvitacionPedido();
+
+            InvitacionPedido Invitacion;
                                     
             for (int i = 0; i < Invitados.Count(); i++)
             {
 
                 int.TryParse(Invitados[i], out idUsr);
-                                
+
+                Invitacion = new InvitacionPedido();
+
                 Invitacion.IdUsuario = idUsr;
                 Invitacion.IdPedido = pedido.IdPedido;
                 Invitacion.Token = new Guid(new Md5Hash().GetMD5((idUsr.ToString() + pedido.FechaCreacion)));
                 Invitacion.Completado = false;
 
+                //pedido.InvitacionPedido.Add(Invitacion);
 
-                ctx.InvitacionPedido.Add(Invitacion);
+                //ctx.InvitacionPedido.Add(Invitacion);
+                //ctx.SaveChanges();
+                var entry = ctx.Entry(Invitacion);
+                entry.State = EntityState.Added;
+
                 ctx.SaveChanges();
 
             }
+
+           
+
+
         }
 
         public void SetGustos(Pedido pedido, String[] Gustos)
