@@ -53,8 +53,10 @@ namespace ProgramacionWeb3Tp.Servicios
         internal int ObtenerInvitacionesConfirmadas(int idUsuario)
         {
             int Confirmadas = (from l in ctx.InvitacionPedido
-                               where l.IdPedido == 2
+                               where l.Completado == true &&  l.IdUsuario == idUsuario
                                select l).Count();
+
+
 
             
             return Confirmadas;
