@@ -117,22 +117,35 @@ namespace ProgramacionWeb3Tp.Servicios
 
         public void EliminarGustosporPedido(Pedido pedido)
         {
-            //GustoEmpanada Gusto = new GustoEmpanada();
+           
+            pedido.GustoEmpanada.Clear();
+            ctx.SaveChanges();
 
-           foreach (GustoEmpanada gusto in pedido.GustoEmpanada)            
-            {                
-             ctx.GustoEmpanada.Remove(gusto);
-             ctx.SaveChanges();                
-            }
+            //foreach (GustoEmpanada gusto in pedido.GustoEmpanada)            
+            //{                
+            // ctx.GustoEmpanada.Remove(gusto);
+            // ctx.SaveChanges();                
+            //}
+         
         }
 
         public void EliminarInvitacionesporPedido(Pedido pedido)
         {
-            foreach (InvitacionPedido invitacion in pedido.InvitacionPedido)
+            InvitacionPedido invita;
+
+            for (int i=0; i<pedido.InvitacionPedido.Count(); i++)
             {
-                ctx.InvitacionPedido.Remove(invitacion);
+                invita = pedido.InvitacionPedido.ElementAt(i);
+
+                ctx.InvitacionPedido.Remove(invita);
                 ctx.SaveChanges();
             }
+
+            //foreach (InvitacionPedido invitacion in pedido.InvitacionPedido)
+            //{
+            //    ctx.InvitacionPedido.Remove(invitacion);
+            //    ctx.SaveChanges();
+            //}
         }
 
 

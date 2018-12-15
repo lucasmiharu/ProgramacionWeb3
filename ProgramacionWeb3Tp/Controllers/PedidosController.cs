@@ -95,6 +95,8 @@ namespace ProgramacionWeb3Tp.Controllers
                 _pedidoServicio.SetInvitados(nuevo, Request["SelecInvitados"].Split(','));
                 _pedidoServicio.SetGustos(nuevo, Request["SelecGustos"].Split(','));
 
+                nuevo = _pedidoServicio.ObtenerPedidoPorId(nuevo.IdPedido);
+
                 _pedidoServicio.EnviarMail(_pedidoServicio.ObtenerTodosLosUsuariosInvitados(nuevo), nuevo);
 
                 ViewBag.mensaje = "Se genero el pedido nro: " + nuevo.IdPedido;
@@ -156,6 +158,9 @@ namespace ProgramacionWeb3Tp.Controllers
         [ValidateAntiForgeryToken]  //Para prevenir ataques CSRF
         public ActionResult EditarPedido(Pedido pedido)
         {
+
+            pedido = _pedidoServicio.ObtenerPedidoPorId(pedido.IdPedido);
+
             int IdEnvioMail=0;
 
             int.TryParse(Request["enviarInvitacion"],out  IdEnvioMail);
